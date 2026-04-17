@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+}
+const { title, description, canonicalUrl } = Astro.props;
+const canon = canonicalUrl || Astro.url.href;
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canon} />
+  <!-- GA4 — fill in after domain purchase -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+  <slot name="head" />
+</head>
+<body class="bg-white text-gray-900 font-sans">
+  <header class="border-b border-gray-200 px-6 py-4">
+    <nav class="max-w-5xl mx-auto flex items-center justify-between">
+      <a href="/" class="text-lg font-bold text-blue-700">AppCompare</a>
+      <ul class="flex gap-6 text-sm text-gray-600">
+        <li><a href="/compare" class="hover:text-blue-700">Compare Apps</a></li>
+        <li><a href="/categories" class="hover:text-blue-700">Categories</a></li>
+        <li><a href="/blog" class="hover:text-blue-700">Blog</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="max-w-5xl mx-auto px-6 py-10">
+    <slot />
+  </main>
+
+  <footer class="border-t border-gray-200 px-6 py-8 mt-16 text-sm text-gray-500">
+    <div class="max-w-5xl mx-auto flex justify-between">
+      <span>© 2025 AppCompare.com. Not affiliated with Shopify Inc.</span>
+      <ul class="flex gap-4">
+        <li><a href="/privacy" class="hover:text-blue-700">Privacy</a></li>
+        <li><a href="/terms" class="hover:text-blue-700">Terms</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>

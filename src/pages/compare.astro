@@ -1,0 +1,241 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base
+  title="Shopify App Comparison Tool — Compare Apps Side by Side"
+  description="Compare Shopify apps like Klaviyo, Omnisend, Judge.me, Recharge, and more. See pricing, ratings, features, and which app is best for your store."
+>
+  <slot name="head" slot="head">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Shopify App Comparison Tool",
+        "url": "https://app-compare.com/compare",
+        "description": "Interactive tool to compare Shopify apps side by side by price, rating, features, and use case.",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "All",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
+  </slot>
+
+  <section class="text-center py-8">
+    <h1 class="text-4xl font-bold mb-3">Shopify App Comparison Tool</h1>
+    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+      Select two apps below to see a detailed side-by-side comparison of pricing, features, ratings, and best use cases.
+    </p>
+  </section>
+
+  <!-- App selectors -->
+  <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mt-4 mb-8">
+    <div class="flex flex-col gap-1 w-full sm:w-64">
+      <label for="app-a" class="text-sm font-medium text-gray-700">First App</label>
+      <select
+        id="app-a"
+        class="border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="">— Select an app —</option>
+        <option value="klaviyo">Klaviyo</option>
+        <option value="omnisend">Omnisend</option>
+        <option value="mailchimp">Mailchimp</option>
+        <option value="judgeme">Judge.me</option>
+        <option value="yotpo">Yotpo</option>
+        <option value="recharge">Recharge</option>
+        <option value="bold">Bold Subscriptions</option>
+        <option value="seal">Seal Subscriptions</option>
+      </select>
+    </div>
+
+    <div class="hidden sm:flex items-end pb-2 text-gray-400 font-bold text-xl">vs</div>
+
+    <div class="flex flex-col gap-1 w-full sm:w-64">
+      <label for="app-b" class="text-sm font-medium text-gray-700">Second App</label>
+      <select
+        id="app-b"
+        class="border border-gray-300 rounded-lg px-3 py-2 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="">— Select an app —</option>
+        <option value="klaviyo">Klaviyo</option>
+        <option value="omnisend">Omnisend</option>
+        <option value="mailchimp">Mailchimp</option>
+        <option value="judgeme">Judge.me</option>
+        <option value="yotpo">Yotpo</option>
+        <option value="recharge">Recharge</option>
+        <option value="bold">Bold Subscriptions</option>
+        <option value="seal">Seal Subscriptions</option>
+      </select>
+    </div>
+
+    <div class="flex items-end pb-2 w-full sm:w-auto">
+      <button
+        id="compare-btn"
+        class="w-full sm:w-auto px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition disabled:opacity-40 disabled:cursor-not-allowed"
+      >
+        Compare
+      </button>
+    </div>
+  </div>
+
+  <!-- Placeholder state -->
+  <div id="compare-placeholder" class="text-center text-gray-400 py-12 border rounded-xl">
+    <p class="text-lg">Select two apps above and click <strong>Compare</strong> to see results.</p>
+  </div>
+
+  <!-- Comparison table (hidden until comparison runs) -->
+  <div id="compare-result" class="hidden mt-4">
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse text-sm">
+        <thead>
+          <tr>
+            <th class="text-left p-4 bg-gray-50 border border-gray-200 w-40 font-semibold text-gray-600">Feature</th>
+            <th id="col-a" class="p-4 bg-blue-50 border border-gray-200 font-bold text-blue-800 text-center"></th>
+            <th id="col-b" class="p-4 bg-green-50 border border-gray-200 font-bold text-green-800 text-center"></th>
+          </tr>
+        </thead>
+        <tbody id="compare-table-body">
+          <!-- Rows injected by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <p class="text-xs text-gray-400 mt-4 text-center">
+      Pricing and ratings sourced from the Shopify App Store. Data may change — verify before purchase.
+    </p>
+  </div>
+</Base>
+
+<script>
+  const apps = {
+    klaviyo: {
+      name: 'Klaviyo',
+      price: 'From $0/mo (free up to 250 contacts)',
+      freePlan: 'Yes — up to 250 contacts & 500 emails/mo',
+      rating: '4.6 / 5',
+      keyFeatures: 'Email & SMS automation, advanced segmentation, predictive analytics, A/B testing',
+      bestFor: 'Email + SMS automation for growing stores',
+      category: 'Email Marketing',
+    },
+    omnisend: {
+      name: 'Omnisend',
+      price: 'From $0/mo (500 emails/mo free)',
+      freePlan: 'Yes — 500 emails/mo & 60 SMS/mo',
+      rating: '4.7 / 5',
+      keyFeatures: 'Omnichannel flows, email + SMS + push, pre-built automations, segmentation',
+      bestFor: 'Omnichannel marketing (email + SMS + push)',
+      category: 'Email Marketing',
+    },
+    mailchimp: {
+      name: 'Mailchimp',
+      price: 'From $0/mo (500 contacts free)',
+      freePlan: 'Yes — 500 contacts & 1,000 emails/mo',
+      rating: '4.0 / 5',
+      keyFeatures: 'Drag-and-drop editor, basic automation, audience management, landing pages',
+      bestFor: 'Beginners and stores already using Mailchimp',
+      category: 'Email Marketing',
+    },
+    judgeme: {
+      name: 'Judge.me',
+      price: '$0 free / $15/mo Pro',
+      freePlan: 'Yes — unlimited review requests',
+      rating: '5.0 / 5',
+      keyFeatures: 'Photo & video reviews, Q&A, SEO snippets, review import, loyalty integration',
+      bestFor: 'Product reviews on any budget',
+      category: 'Product Reviews',
+    },
+    yotpo: {
+      name: 'Yotpo',
+      price: 'Free plan / from $15/mo',
+      freePlan: 'Yes — limited review requests',
+      rating: '4.6 / 5',
+      keyFeatures: 'Reviews, loyalty, SMS, visual UGC, Google Shopping integration',
+      bestFor: 'Enterprise-level review & loyalty programs',
+      category: 'Product Reviews',
+    },
+    recharge: {
+      name: 'Recharge',
+      price: 'From $99/mo',
+      freePlan: 'No',
+      rating: '4.5 / 5',
+      keyFeatures: 'Subscription management, customer portal, analytics, dunning, integrations',
+      bestFor: 'Subscription boxes and high-volume stores',
+      category: 'Subscriptions',
+    },
+    bold: {
+      name: 'Bold Subscriptions',
+      price: 'From $49/mo',
+      freePlan: 'No',
+      rating: '4.3 / 5',
+      keyFeatures: 'Recurring billing, mixed-cart support, customer portal, order management',
+      bestFor: 'Simple subscription products',
+      category: 'Subscriptions',
+    },
+    seal: {
+      name: 'Seal Subscriptions',
+      price: 'Free / from $4.95/mo',
+      freePlan: 'Yes — up to 150 subscribers',
+      rating: '4.9 / 5',
+      keyFeatures: 'Recurring orders, discount management, loyalty gifts, analytics, multi-language',
+      bestFor: 'Budget-friendly subscriptions for small stores',
+      category: 'Subscriptions',
+    },
+  };
+
+  const rows = [
+    { key: 'price', label: 'Price' },
+    { key: 'freePlan', label: 'Free Plan' },
+    { key: 'rating', label: 'Rating' },
+    { key: 'category', label: 'Category' },
+    { key: 'keyFeatures', label: 'Key Features' },
+    { key: 'bestFor', label: 'Best For' },
+  ];
+
+  const btnCompare = document.getElementById('compare-btn');
+  const selectA = document.getElementById('app-a');
+  const selectB = document.getElementById('app-b');
+  const placeholder = document.getElementById('compare-placeholder');
+  const result = document.getElementById('compare-result');
+  const colA = document.getElementById('col-a');
+  const colB = document.getElementById('col-b');
+  const tbody = document.getElementById('compare-table-body');
+
+  btnCompare.addEventListener('click', () => {
+    const keyA = selectA.value;
+    const keyB = selectB.value;
+
+    if (!keyA || !keyB) {
+      alert('Please select two apps to compare.');
+      return;
+    }
+    if (keyA === keyB) {
+      alert('Please select two different apps.');
+      return;
+    }
+
+    const appA = apps[keyA];
+    const appB = apps[keyB];
+
+    colA.textContent = appA.name;
+    colB.textContent = appB.name;
+
+    tbody.innerHTML = rows
+      .map((row) => {
+        return `
+          <tr class="even:bg-gray-50">
+            <td class="p-4 border border-gray-200 font-medium text-gray-600 align-top">${row.label}</td>
+            <td class="p-4 border border-gray-200 text-gray-800 align-top text-center">${appA[row.key]}</td>
+            <td class="p-4 border border-gray-200 text-gray-800 align-top text-center">${appB[row.key]}</td>
+          </tr>
+        `;
+      })
+      .join('');
+
+    placeholder.classList.add('hidden');
+    result.classList.remove('hidden');
+    result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
