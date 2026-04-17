@@ -15,8 +15,13 @@ const canon = canonicalUrl || Astro.url.href;
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canon} />
-  <!-- GA4 — fill in after domain purchase -->
-  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GGVRNDHQQH"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GGVRNDHQQH');
+  </script>
   <slot name="head" />
 </head>
 <body class="bg-white text-gray-900 font-sans">
