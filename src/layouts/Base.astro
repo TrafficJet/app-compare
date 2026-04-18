@@ -3,8 +3,9 @@ interface Props {
   title: string;
   description: string;
   canonicalUrl?: string;
+  noindex?: boolean;
 }
-const { title, description, canonicalUrl } = Astro.props;
+const { title, description, canonicalUrl, noindex } = Astro.props;
 const canon = canonicalUrl || Astro.url.href;
 const GA_ID = 'G-GGVRNDHQQH';
 ---
@@ -25,8 +26,10 @@ const GA_ID = 'G-GGVRNDHQQH';
   <meta name="twitter:title" content={title} />
   <meta name="twitter:description" content={description} />
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+  {noindex && <meta name="robots" content="noindex, follow" />}
   <slot name="head" />
 </head>
 <body class="bg-white text-gray-900 font-sans">
@@ -34,9 +37,9 @@ const GA_ID = 'G-GGVRNDHQQH';
     <nav class="max-w-5xl mx-auto flex items-center justify-between">
       <a href="/" class="text-lg font-bold text-blue-700">AppCompare</a>
       <ul class="flex gap-6 text-sm text-gray-600">
-        <li><a href="/compare" class="hover:text-blue-700">Compare Apps</a></li>
-        <li><a href="/categories" class="hover:text-blue-700">Categories</a></li>
-        <li><a href="/blog" class="hover:text-blue-700">Blog</a></li>
+        <li><a href="/compare/" class="hover:text-blue-700">Compare Apps</a></li>
+        <li><a href="/blog/" class="hover:text-blue-700">Blog</a></li>
+        <li><a href="/about/" class="hover:text-blue-700">About</a></li>
       </ul>
     </nav>
   </header>
@@ -47,10 +50,10 @@ const GA_ID = 'G-GGVRNDHQQH';
 
   <footer class="border-t border-gray-200 px-6 py-8 mt-16 text-sm text-gray-500">
     <div class="max-w-5xl mx-auto flex justify-between">
-      <span>© 2025 AppCompare.com. Not affiliated with Shopify Inc.</span>
+      <span>© {new Date().getFullYear()} AppCompare.com. Not affiliated with Shopify Inc.</span>
       <ul class="flex gap-4">
-        <li><a href="/privacy" class="hover:text-blue-700">Privacy</a></li>
-        <li><a href="/terms" class="hover:text-blue-700">Terms</a></li>
+        <li><a href="/privacy/" class="hover:text-blue-700">Privacy</a></li>
+        <li><a href="/terms/" class="hover:text-blue-700">Terms</a></li>
       </ul>
     </div>
   </footer>
