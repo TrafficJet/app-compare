@@ -37,6 +37,9 @@ const GA_ID = 'G-GGVRNDHQQH';
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   {noindex && <meta name="robots" content="noindex, follow" />}
   <slot name="head" />
+  <script type="application/ld+json" is:inline>
+  {"@context": "https://schema.org", "@type": "WebSite", "name": "AppCompare — Shopify App Comparison", "url": "https://app-compare.com/", "description": "Compare the best Shopify apps side by side. Reviews, pricing, features, and ratings for 500+ Shopify apps.", "potentialAction": {"@type": "SearchAction", "target": "https://app-compare.com/?s={search_term_string}", "query-input": "required name=search_term_string"}}
+  </script>
 </head>
 <body class="bg-white text-gray-900 font-sans">
   <header class="border-b border-gray-200 px-6 py-4">
