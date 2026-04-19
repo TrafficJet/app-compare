@@ -1,0 +1,10 @@
+# App-Compare.com
+
+Unbiased comparison of Shopify apps — pricing, features, integrations, and real user reviews to help merchants pick the right tools for their store.
+
+## About
+https://app-compare.com/
+
+## Blog
+https://app-compare.com/blog/
+https://app-compare.com/sitemap.xml
