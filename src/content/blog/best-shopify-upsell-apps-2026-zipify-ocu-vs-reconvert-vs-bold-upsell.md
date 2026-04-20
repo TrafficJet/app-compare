@@ -6,6 +6,8 @@ description: "Compare Zipify OCU, ReConvert, and Bold Upsell. See pricing, featu
 author: "Alex Morgan"
 tags: ["Best Shopify Upsell Apps 2026: Zipify OCU vs ReConvert vs Bold Upsell"]
 seoTitle: "Best Shopify Upsell Apps 2026: Zipify vs ReConvert vs Bold | App Compare"
+heroImage: "/images/best-shopify-upsell-apps-2026-zipify-ocu-vs-reconvert-vs-bold-upsell/hero.jpg"
+heroImageAlt: "Shopify checkout screen displaying upsell offer on laptop computer"
 ---
 
 # Best Shopify Upsell Apps 2026: Zipify vs ReConvert vs Bold
