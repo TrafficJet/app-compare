@@ -37,7 +37,7 @@ Judge.me is the most generous free option in the Shopify App Store. The free pla
 
 The **Awesome Plan at $15/month** (as of 2026) unlocks Google Shopping rich snippets, custom review forms, a Q&A feature, coupon-after-review automation, and full widget customization. Stores that want Google Seller Ratings integration are covered on this plan.
 
-In our testing, Judge.me review request emails averaged an **18–22% open rate** across the three test stores (internal testing data, 2026). That's in line with the ~20% industry benchmark for transactional email reported by Mailchimp. The automatic review request sequences are easy to configure. Go to **Judge.me > Email > Review Requests**, set a delay period after delivery, pick a template, and turn on photo upload prompts.
+In our testing, Judge.me review request emails averaged an **18–22% open rate** across the three test stores (internal testing data, 2026). That matches the ~20% industry benchmark for transactional email reported by Mailchimp. The automatic review request sequences are easy to configure. Go to **Judge.me > Email > Review Requests**, set a delay period after delivery, pick a template, and turn on photo upload prompts.
 
 **Real-world example:** A bootstrapped supplements brand switched from manually requesting reviews via Klaviyo to Judge.me's built-in sequences. Within 60 days they collected 312 new reviews without touching their email marketing platform. The owner said the time savings alone — roughly 3 hours per week previously spent managing review request flows — justified the switch.
 
