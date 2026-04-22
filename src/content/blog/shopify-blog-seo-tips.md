@@ -6,6 +6,8 @@ description: "Learn proven Shopify blog SEO tips to rank for buyer-intent keywor
 author: "Alex Morgan"
 tags: ["shopify blog seo tips"]
 seoTitle: "Shopify Blog SEO Tips That Drive Traffic in 2026 | App Compare"
+heroImage: "/images/shopify-blog-seo-tips/hero.jpg"
+heroImageAlt: "Blogger writing SEO-optimized blog post on laptop with analytics dashboard visible"
 ---
 
 # Shopify Blog SEO Tips That Drive Real Traffic in 2026
