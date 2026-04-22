@@ -1,0 +1,357 @@
+---
+import { PAIRS, type ComparisonPair } from '../../data/pairs';
+import { APPS, CATEGORIES, type AppData } from '../../data/apps';
+import Base from '../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return PAIRS.map(pair => ({
+    params: { slug: pair.slug },
+    props: {
+      pair,
+      app1: APPS[pair.app1],
+      app2: APPS[pair.app2],
+      category: CATEGORIES[pair.category],
+      related: PAIRS.filter(p => p.slug !== pair.slug && p.category === pair.category).slice(0, 4),
+    },
+  }));
+}
+
+interface Props {
+  pair: ComparisonPair;
+  app1: AppData;
+  app2: AppData;
+  category: typeof CATEGORIES[string];
+  related: ComparisonPair[];
+}
+
+const { pair, app1, app2, category, related } = Astro.props;
+
+function featureDisplay(val: boolean | string | undefined): { text: string; cls: string } {
+  if (val === true) return { text: '✓', cls: 'text-green-600 dark:text-green-400 font-bold' };
+  if (val === false) return { text: '✗', cls: 'text-red-500 dark:text-red-400 font-bold' };
+  if (val === undefined || val === null) return { text: '—', cls: 'text-gray-400 dark:text-gray-500' };
+  return { text: val as string, cls: 'text-gray-700 dark:text-gray-300 text-sm' };
+}
+
+const canonicalUrl = `https://app-compare.com/compare/${pair.slug}/`;
+const title = `${app1.name} vs ${app2.name} (2026): Which Shopify App Wins?`;
+const description = pair.summary;
+
+const faqItems = [
+  {
+    q: `Which is better for Shopify: ${app1.name} or ${app2.name}?`,
+    a: `${pair.verdict}. Choose ${app1.name} when: ${pair.app1WinsWhen}. Choose ${app2.name} when: ${pair.app2WinsWhen}.`,
+  },
+  {
+    q: `Is ${app1.name} free?`,
+    a: app1.pricing.hasFree
+      ? `Yes, ${app1.name} has a free plan: ${app1.pricing.freeTier}.`
+      : `No, ${app1.name} does not have a free plan. Paid plans start at $${app1.pricing.startingPrice}/mo.`,
+  },
+  {
+    q: `Is ${app2.name} free?`,
+    a: app2.pricing.hasFree
+      ? `Yes, ${app2.name} has a free plan: ${app2.pricing.freeTier}.`
+      : `No, ${app2.name} does not have a free plan. Paid plans start at $${app2.pricing.startingPrice}/mo.`,
+  },
+  {
+    q: `How much does ${app1.name} cost?`,
+    a: `${app1.name} paid plans start at $${app1.pricing.startingPrice}/mo (${app1.pricing.pricingModel}). ${app1.pricing.exitCostNote || ''}`.trim(),
+  },
+  {
+    q: `How much does ${app2.name} cost?`,
+    a: `${app2.name} paid plans start at $${app2.pricing.startingPrice}/mo (${app2.pricing.pricingModel}). ${app2.pricing.exitCostNote || ''}`.trim(),
+  },
+  {
+    q: `What is the main difference between ${app1.name} and ${app2.name}?`,
+    a: pair.summary,
+  },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+---
+<Base title={title} description={description} canonicalUrl={canonicalUrl} noWebAppSchema={true}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={faqSchema} />
+  </Fragment>
+
+  <!-- Breadcrumb -->
+  <nav class="text-xs text-gray-400 dark:text-gray-500 mb-6 flex items-center gap-1.5 flex-wrap">
+    <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400">Home</a>
+    <span>/</span>
+    <a href="/compare/" class="hover:text-blue-600 dark:hover:text-blue-400">Compare</a>
+    <span>/</span>
+    <span class="text-gray-600 dark:text-gray-300">{app1.name} vs {app2.name}</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="text-center mb-10">
+    <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full mb-4">
+      <span>{category?.icon}</span>
+      <span>{category?.name}</span>
+    </div>
+    <h1 class="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+      {app1.name} vs {app2.name}
+    </h1>
+    <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto mb-2">
+      {pair.summary}
+    </p>
+    <div class="flex flex-wrap gap-3 justify-center mt-5">
+      <div class="text-sm bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 px-4 py-2 rounded-lg font-medium">
+        ⭐ {app1.name}: {app1.rating}/5 ({app1.reviewCount.toLocaleString()} reviews)
+      </div>
+      <div class="text-sm bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 text-amber-800 dark:text-amber-300 px-4 py-2 rounded-lg font-medium">
+        ⭐ {app2.name}: {app2.rating}/5 ({app2.reviewCount.toLocaleString()} reviews)
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Pick Cards -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+    <div class="border-2 border-blue-300 dark:border-blue-700 bg-blue-50 dark:bg-blue-950 rounded-xl p-5">
+      <div class="text-xs font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400 mb-2">Pick {app1.name} when:</div>
+      <p class="text-gray-800 dark:text-gray-200 text-sm leading-relaxed">{pair.app1WinsWhen}</p>
+      <div class="mt-3 text-xs text-gray-500 dark:text-gray-400 italic">"{app1.bestFor}"</div>
+    </div>
+    <div class="border-2 border-purple-300 dark:border-purple-700 bg-purple-50 dark:bg-purple-950 rounded-xl p-5">
+      <div class="text-xs font-bold uppercase tracking-wide text-purple-600 dark:text-purple-400 mb-2">Pick {app2.name} when:</div>
+      <p class="text-gray-800 dark:text-gray-200 text-sm leading-relaxed">{pair.app2WinsWhen}</p>
+      <div class="mt-3 text-xs text-gray-500 dark:text-gray-400 italic">"{app2.bestFor}"</div>
+    </div>
+  </div>
+
+  <!-- Pricing Comparison -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold mb-5 text-gray-900 dark:text-gray-100">Pricing Comparison</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <!-- App1 Pricing -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="font-semibold text-gray-900 dark:text-gray-100">{app1.name}</span>
+          {app1.pricing.hasFree && <span class="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-0.5 rounded-full font-medium">Free plan</span>}
+        </div>
+        <div class="text-xs text-gray-500 dark:text-gray-400 mb-3 italic">{app1.pricing.pricingModel}</div>
+        <div class="space-y-2">
+          {app1.pricing.tiers.map(tier => (
+            <div class="flex items-start justify-between border border-gray-200 dark:border-gray-700 rounded-lg p-3 bg-white dark:bg-gray-900">
+              <div>
+                <div class="font-medium text-sm text-gray-900 dark:text-gray-100">{tier.name}</div>
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{tier.limits}</div>
+              </div>
+              <div class="text-right shrink-0 ml-3">
+                <div class="font-bold text-gray-900 dark:text-gray-100">
+                  {tier.price === null ? 'Custom' : tier.price === 0 ? 'Free' : `$${tier.price}`}
+                </div>
+                <div class="text-xs text-gray-400 dark:text-gray-500">{tier.billingNote}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {app1.pricing.exitCostNote && (
+          <div class="mt-2 text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded p-2">
+            ⚠️ {app1.pricing.exitCostNote}
+          </div>
+        )}
+      </div>
+      <!-- App2 Pricing -->
+      <div>
+        <div class="flex items-center gap-2 mb-3">
+          <span class="font-semibold text-gray-900 dark:text-gray-100">{app2.name}</span>
+          {app2.pricing.hasFree && <span class="text-xs bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-300 px-2 py-0.5 rounded-full font-medium">Free plan</span>}
+        </div>
+        <div class="text-xs text-gray-500 dark:text-gray-400 mb-3 italic">{app2.pricing.pricingModel}</div>
+        <div class="space-y-2">
+          {app2.pricing.tiers.map(tier => (
+            <div class="flex items-start justify-between border border-gray-200 dark:border-gray-700 rounded-lg p-3 bg-white dark:bg-gray-900">
+              <div>
+                <div class="font-medium text-sm text-gray-900 dark:text-gray-100">{tier.name}</div>
+                <div class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{tier.limits}</div>
+              </div>
+              <div class="text-right shrink-0 ml-3">
+                <div class="font-bold text-gray-900 dark:text-gray-100">
+                  {tier.price === null ? 'Custom' : tier.price === 0 ? 'Free' : `$${tier.price}`}
+                </div>
+                <div class="text-xs text-gray-400 dark:text-gray-500">{tier.billingNote}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        {app2.pricing.exitCostNote && (
+          <div class="mt-2 text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded p-2">
+            ⚠️ {app2.pricing.exitCostNote}
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature Matrix -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold mb-5 text-gray-900 dark:text-gray-100">Feature Comparison</h2>
+    <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+            <th class="text-left px-4 py-3 font-semibold text-gray-600 dark:text-gray-400 w-1/2">Feature</th>
+            <th class="text-center px-4 py-3 font-semibold text-blue-700 dark:text-blue-400">{app1.name}</th>
+            <th class="text-center px-4 py-3 font-semibold text-purple-700 dark:text-purple-400">{app2.name}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pair.featureKeys.map((key, i) => {
+            const v1 = featureDisplay(app1.features[key]);
+            const v2 = featureDisplay(app2.features[key]);
+            return (
+              <tr class={`border-b border-gray-100 dark:border-gray-800 ${i % 2 === 0 ? 'bg-white dark:bg-gray-950' : 'bg-gray-50 dark:bg-gray-900'}`}>
+                <td class="px-4 py-3 text-gray-700 dark:text-gray-300">{key}</td>
+                <td class={`px-4 py-3 text-center ${v1.cls}`}>{v1.text}</td>
+                <td class={`px-4 py-3 text-center ${v2.cls}`}>{v2.text}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Pros and Cons -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold mb-5 text-gray-900 dark:text-gray-100">Pros &amp; Cons</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-3">{app1.name}</h3>
+        <div class="space-y-2 mb-4">
+          {app1.pros.map(pro => (
+            <div class="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+              <span class="text-green-500 mt-0.5 shrink-0">✓</span>
+              <span>{pro}</span>
+            </div>
+          ))}
+        </div>
+        <div class="space-y-2">
+          {app1.cons.map(con => (
+            <div class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <span class="text-red-400 mt-0.5 shrink-0">✗</span>
+              <span>{con}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-3">{app2.name}</h3>
+        <div class="space-y-2 mb-4">
+          {app2.pros.map(pro => (
+            <div class="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+              <span class="text-green-500 mt-0.5 shrink-0">✓</span>
+              <span>{pro}</span>
+            </div>
+          ))}
+        </div>
+        <div class="space-y-2">
+          {app2.cons.map(con => (
+            <div class="flex items-start gap-2 text-sm text-gray-600 dark:text-gray-400">
+              <span class="text-red-400 mt-0.5 shrink-0">✗</span>
+              <span>{con}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Best For / Not For -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold mb-5 text-gray-900 dark:text-gray-100">Who Should Use Each?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+        <div class="font-semibold text-gray-900 dark:text-gray-100 mb-3">{app1.name}</div>
+        <div class="mb-3">
+          <div class="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide mb-1">Best for</div>
+          <p class="text-sm text-gray-700 dark:text-gray-300">{app1.bestFor}</p>
+        </div>
+        <div>
+          <div class="text-xs font-semibold text-red-500 dark:text-red-400 uppercase tracking-wide mb-1">Not for</div>
+          <p class="text-sm text-gray-600 dark:text-gray-400">{app1.notFor}</p>
+        </div>
+      </div>
+      <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+        <div class="font-semibold text-gray-900 dark:text-gray-100 mb-3">{app2.name}</div>
+        <div class="mb-3">
+          <div class="text-xs font-semibold text-green-600 dark:text-green-400 uppercase tracking-wide mb-1">Best for</div>
+          <p class="text-sm text-gray-700 dark:text-gray-300">{app2.bestFor}</p>
+        </div>
+        <div>
+          <div class="text-xs font-semibold text-red-500 dark:text-red-400 uppercase tracking-wide mb-1">Not for</div>
+          <p class="text-sm text-gray-600 dark:text-gray-400">{app2.notFor}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verdict -->
+  <section class="mb-10 bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950 dark:to-purple-950 border border-blue-200 dark:border-blue-800 rounded-xl p-6">
+    <h2 class="text-xl font-bold mb-3 text-gray-900 dark:text-gray-100">Our Verdict</h2>
+    <p class="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">{pair.verdict}.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+      <div class="bg-white dark:bg-gray-900 rounded-lg p-3 border border-blue-200 dark:border-blue-800">
+        <div class="font-semibold text-blue-700 dark:text-blue-400 mb-1">Choose {app1.name} if:</div>
+        <p class="text-gray-600 dark:text-gray-400">{pair.app1WinsWhen}</p>
+      </div>
+      <div class="bg-white dark:bg-gray-900 rounded-lg p-3 border border-purple-200 dark:border-purple-800">
+        <div class="font-semibold text-purple-700 dark:text-purple-400 mb-1">Choose {app2.name} if:</div>
+        <p class="text-gray-600 dark:text-gray-400">{pair.app2WinsWhen}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Store Links -->
+  <div class="flex flex-wrap gap-3 mb-10">
+    <a href={app1.shopifyAppUrl} target="_blank" rel="noopener nofollow sponsored"
+      class="flex items-center gap-2 px-4 py-2.5 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg text-sm font-medium hover:opacity-90 transition">
+      <span>View {app1.name} on Shopify App Store →</span>
+    </a>
+    <a href={app2.shopifyAppUrl} target="_blank" rel="noopener nofollow sponsored"
+      class="flex items-center gap-2 px-4 py-2.5 border-2 border-gray-900 dark:border-gray-100 text-gray-900 dark:text-gray-100 rounded-lg text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-900 transition">
+      <span>View {app2.name} on Shopify App Store →</span>
+    </a>
+  </div>
+
+  <!-- FAQ -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold mb-5 text-gray-900 dark:text-gray-100">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+      {faqItems.map(item => (
+        <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.q}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related Comparisons -->
+  {related.length > 0 && (
+    <section>
+      <h2 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Related {category?.name} Comparisons</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {related.map(rel => (
+          <a href={`/compare/${rel.slug}/`}
+            class="block border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+            <div class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 mb-1">
+              {APPS[rel.app1]?.name} vs {APPS[rel.app2]?.name}
+            </div>
+            <div class="text-xs text-gray-500 dark:text-gray-400">{rel.verdict}</div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+</Base>

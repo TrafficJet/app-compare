@@ -5,18 +5,20 @@ interface Props {
   canonicalUrl?: string;
   noindex?: boolean;
   ogImage?: string;
+  noWebAppSchema?: boolean;
 }
-const { title, description, canonicalUrl, noindex, ogImage } = Astro.props;
+const { title, description, canonicalUrl, noindex, ogImage, noWebAppSchema } = Astro.props;
 const canon = canonicalUrl || Astro.url.href;
 const finalOgImage = ogImage || 'https://app-compare.com/og-default.png';
 const GA_ID = 'G-GGVRNDHQQH';
+const siteSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebSite","name":"AppCompare — Shopify App Comparison","url":"https://app-compare.com/","description":"Compare the best Shopify apps side by side. Reviews, pricing, features, and ratings.","potentialAction":{"@type":"SearchAction","target":"https://app-compare.com/?s={search_term_string}","query-input":"required name=search_term_string"}});
 ---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#2563eb" />
+  <meta name="theme-color" content="#1e40af" />
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canon} />
@@ -37,18 +39,39 @@ const GA_ID = 'G-GGVRNDHQQH';
   <link rel="dns-prefetch" href="https://www.google-analytics.com" />
   {noindex && <meta name="robots" content="noindex, follow" />}
   <slot name="head" />
-  <script type="application/ld+json" is:inline>
-  {"@context": "https://schema.org", "@type": "WebSite", "name": "AppCompare — Shopify App Comparison", "url": "https://app-compare.com/", "description": "Compare the best Shopify apps side by side. Reviews, pricing, features, and ratings for 500+ Shopify apps.", "potentialAction": {"@type": "SearchAction", "target": "https://app-compare.com/?s={search_term_string}", "query-input": "required name=search_term_string"}}
+  {!noWebAppSchema && <script type="application/ld+json" set:html={siteSchemaJson} />}
+  <!-- Anti-FOUC: apply dark mode before paint -->
+  <script is:inline>
+    (function() {
+      var saved = localStorage.getItem('theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (saved === 'dark' || (!saved && prefersDark)) {
+        document.documentElement.classList.add('dark');
+      }
+    })();
   </script>
 </head>
-<body class="bg-white text-gray-900 font-sans">
-  <header class="border-b border-gray-200 px-6 py-4">
+<body class="bg-white text-gray-900 font-sans dark:bg-gray-950 dark:text-gray-100 transition-colors duration-200">
+  <header class="border-b border-gray-200 dark:border-gray-800 px-6 py-4 bg-white dark:bg-gray-950">
     <nav class="max-w-5xl mx-auto flex items-center justify-between">
-      <a href="/" class="text-lg font-bold text-blue-700">AppCompare</a>
-      <ul class="flex gap-6 text-sm text-gray-600">
-        <li><a href="/compare/" class="hover:text-blue-700">Compare Apps</a></li>
-        <li><a href="/blog/" class="hover:text-blue-700">Blog</a></li>
-        <li><a href="/about/" class="hover:text-blue-700">About</a></li>
+      <a href="/" class="text-lg font-bold text-blue-700 dark:text-blue-400">AppCompare</a>
+      <ul class="flex gap-5 text-sm text-gray-600 dark:text-gray-400 flex-wrap items-center">
+        <li><a href="/compare/" class="hover:text-blue-700 dark:hover:text-blue-400">Compare</a></li>
+        <li><a href="/compare/klaviyo-vs-mailchimp/" class="hover:text-blue-700 dark:hover:text-blue-400">Email</a></li>
+        <li><a href="/compare/yotpo-vs-judgeme/" class="hover:text-blue-700 dark:hover:text-blue-400">Reviews</a></li>
+        <li><a href="/compare/gorgias-vs-tidio/" class="hover:text-blue-700 dark:hover:text-blue-400">Support</a></li>
+        <li><a href="/blog/" class="hover:text-blue-700 dark:hover:text-blue-400">Blog</a></li>
+        <li>
+          <button id="theme-toggle" aria-label="Toggle dark mode"
+            class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <svg id="icon-sun" class="hidden w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" clip-rule="evenodd"/>
+            </svg>
+            <svg id="icon-moon" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"/>
+            </svg>
+          </button>
+        </li>
       </ul>
     </nav>
   </header>
@@ -57,22 +80,47 @@ const GA_ID = 'G-GGVRNDHQQH';
     <slot />
   </main>
 
-  <footer class="border-t border-gray-200 px-6 py-8 mt-16 text-sm text-gray-500">
-    <div class="max-w-5xl mx-auto flex justify-between">
-      <span>© {new Date().getFullYear()} AppCompare.com. Not affiliated with Shopify Inc.</span>
-      <ul class="flex gap-4">
-        <li><a href="/privacy/" class="hover:text-blue-700">Privacy</a></li>
-        <li><a href="/terms/" class="hover:text-blue-700">Terms</a></li>
-      </ul>
+  <footer class="border-t border-gray-200 dark:border-gray-800 px-6 py-8 mt-16 text-sm text-gray-500 dark:text-gray-400 bg-white dark:bg-gray-950">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 mb-3">
+        <span>© {new Date().getFullYear()} AppCompare.com — independent tool, not affiliated with Shopify Inc.</span>
+        <ul class="flex gap-4 shrink-0">
+          <li><a href="/privacy/" class="hover:text-blue-700 dark:hover:text-blue-400">Privacy</a></li>
+          <li><a href="/terms/" class="hover:text-blue-700 dark:hover:text-blue-400">Terms</a></li>
+          <li><a href="/about/" class="hover:text-blue-700 dark:hover:text-blue-400">About</a></li>
+        </ul>
+      </div>
+      <p class="text-xs text-gray-400 dark:text-gray-500">App ratings, pricing, and features are sourced from Shopify App Store and vendor websites. Data is updated periodically — verify current pricing before purchasing.</p>
     </div>
   </footer>
-  <!-- Google Analytics deferred to avoid render blocking -->
+
   <script defer src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
   <script define:vars={{ GA_ID }}>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', GA_ID);
+  </script>
+  <script is:inline>
+    (function() {
+      var btn = document.getElementById('theme-toggle');
+      var sun = document.getElementById('icon-sun');
+      var moon = document.getElementById('icon-moon');
+
+      function syncIcons() {
+        var isDark = document.documentElement.classList.contains('dark');
+        sun.classList.toggle('hidden', !isDark);
+        moon.classList.toggle('hidden', isDark);
+      }
+
+      syncIcons();
+
+      btn.addEventListener('click', function() {
+        var isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        syncIcons();
+      });
+    })();
   </script>
 </body>
 </html>
