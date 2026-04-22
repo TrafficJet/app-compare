@@ -6,6 +6,8 @@ description: "See every country where Shopify Payments is available in 2026, eli
 author: "Alex Morgan"
 tags: ["shopify payments countries"]
 seoTitle: "Shopify Payments Countries: Full 2026 Eligibility List"
+heroImage: "/images/shopify-payments-countries/hero.jpg"
+heroImageAlt: "Merchant reviewing Shopify Payments configuration and currency settings on laptop"
 ---
 
 # Shopify Payments Countries: Full 2026 Eligibility List
