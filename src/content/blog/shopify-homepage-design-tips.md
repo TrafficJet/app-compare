@@ -6,6 +6,8 @@ description: "Boost conversions with proven Shopify homepage design tips. Learn 
 author: "Alex Morgan"
 tags: ["shopify homepage design tips"]
 seoTitle: "Shopify Homepage Design Tips That Drive More Sales"
+heroImage: "/images/shopify-homepage-design-tips/hero.jpg"
+heroImageAlt: "Modern ecommerce homepage displayed on mobile phone and laptop showing product imagery and call-to-action buttons"
 ---
 
 # Shopify Homepage Design Tips That Drive More Sales
