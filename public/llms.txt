@@ -1,10 +1,31 @@
 # App-Compare.com
 
-Unbiased comparison of Shopify apps — pricing, features, integrations, and real user reviews to help merchants pick the right tools for their store.
+Unbiased Shopify app comparisons — side-by-side pricing, features, integrations, and verdicts for 60+ apps across email marketing, reviews, customer support, shipping, subscriptions, loyalty, analytics, and upsell.
 
 ## About
 https://app-compare.com/
 
-## Blog
-https://app-compare.com/blog/
-https://app-compare.com/sitemap.xml
+## Top Comparisons
+https://app-compare.com/compare/klaviyo-vs-mailchimp/
+https://app-compare.com/compare/yotpo-vs-judgeme/
+https://app-compare.com/compare/gorgias-vs-tidio/
+https://app-compare.com/compare/aftership-vs-shipstation/
+https://app-compare.com/compare/recharge-vs-bold/
+https://app-compare.com/compare/smile-vs-loyaltylion/
+https://app-compare.com/compare/triplewhale-vs-northbeam/
+https://app-compare.com/compare/zipify-vs-reconvert/
+
+## Best-Of Pages
+https://app-compare.com/best/email-marketing/
+https://app-compare.com/best/product-reviews/
+https://app-compare.com/best/customer-support/
+https://app-compare.com/best/subscriptions/
+https://app-compare.com/best/loyalty-rewards/
+https://app-compare.com/best/analytics/
+https://app-compare.com/best/upsell/
+
+## All Comparisons
+https://app-compare.com/compare/
+
+## Sitemap
+https://app-compare.com/sitemap-index.xml

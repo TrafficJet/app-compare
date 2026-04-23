@@ -12,6 +12,8 @@ const canon = canonicalUrl || Astro.url.href;
 const finalOgImage = ogImage || 'https://app-compare.com/og-default.png';
 const GA_ID = 'G-GGVRNDHQQH';
 const siteSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"WebSite","name":"AppCompare — Shopify App Comparison","url":"https://app-compare.com/","description":"Compare the best Shopify apps side by side. Reviews, pricing, features, and ratings.","potentialAction":{"@type":"SearchAction","target":"https://app-compare.com/?s={search_term_string}","query-input":"required name=search_term_string"}});
+const _path = new URL(canon).pathname;
+const breadcrumbJson = _path !== '/' ? JSON.stringify({"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"App Compare","item":"https://app-compare.com/"},{"@type":"ListItem","position":2,"name":title.split(' (')[0].split(' — ')[0].trim(),"item":canon}]}) : null;
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -40,6 +42,7 @@ const siteSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"
   {noindex && <meta name="robots" content="noindex, follow" />}
   <slot name="head" />
   {!noWebAppSchema && <script type="application/ld+json" set:html={siteSchemaJson} />}
+  {breadcrumbJson && <script type="application/ld+json" set:html={breadcrumbJson} />}
   <!-- Anti-FOUC: apply dark mode before paint -->
   <script is:inline>
     (function() {
@@ -88,6 +91,9 @@ const siteSchemaJson = JSON.stringify({"@context":"https://schema.org","@type":"
           <li><a href="/privacy/" class="hover:text-blue-700 dark:hover:text-blue-400">Privacy</a></li>
           <li><a href="/terms/" class="hover:text-blue-700 dark:hover:text-blue-400">Terms</a></li>
           <li><a href="/about/" class="hover:text-blue-700 dark:hover:text-blue-400">About</a></li>
+          <li class="text-gray-300 dark:text-gray-700">|</li>
+          <li><a href="https://shopify-fee-calc.com/" class="hover:text-blue-700 dark:hover:text-blue-400">Shopify Fee Calc</a></li>
+          <li><a href="https://commission-calc.com/" class="hover:text-blue-700 dark:hover:text-blue-400">Commission Calc</a></li>
         </ul>
       </div>
       <p class="text-xs text-gray-400 dark:text-gray-500">App ratings, pricing, and features are sourced from Shopify App Store and vendor websites. Data is updated periodically — verify current pricing before purchasing.</p>

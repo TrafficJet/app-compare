@@ -1,0 +1,320 @@
+---
+import { APPS, CATEGORIES, type CategoryId } from '../../data/apps';
+import { PAIRS } from '../../data/pairs';
+import Base from '../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return Object.keys(APPS).map(id => ({
+    params: { slug: id },
+    props: { appId: id },
+  }));
+}
+
+interface Props { appId: string; }
+const { appId } = Astro.props;
+const app = APPS[appId];
+
+const primaryCategory = app.categories[0] as CategoryId;
+const category = CATEGORIES[primaryCategory];
+
+// Get competitors in same category for price comparison
+const competitors = Object.values(APPS)
+  .filter(a => a.id !== appId && a.categories.some(c => app.categories.includes(c)))
+  .sort((a, b) => a.pricing.startingPrice - b.pricing.startingPrice)
+  .slice(0, 4);
+
+function getCompareSlug(id1: string, id2: string): string | null {
+  const pair = PAIRS.find(p =>
+    (p.app1 === id1 && p.app2 === id2) || (p.app1 === id2 && p.app2 === id1)
+  );
+  return pair?.slug ?? null;
+}
+
+const cheaperAlt = competitors.find(c => c.pricing.startingPrice < app.pricing.startingPrice || (c.pricing.hasFree && !app.pricing.hasFree));
+
+const title = `${app.name} Pricing (2026) — Plans, Costs & True Price`;
+const description = `${app.name} pricing breakdown for Shopify. ${app.pricing.hasFree ? `Free plan available. ` : ''}Starts at $${app.pricing.startingPrice}/mo. Compare all tiers, hidden costs, and cheaper alternatives.`;
+const canonicalUrl = `https://app-compare.com/pricing/${appId}/`;
+
+const faq = [
+  {
+    q: `How much does ${app.name} cost per month?`,
+    a: app.pricing.hasFree
+      ? `${app.name} starts free${app.pricing.freeTier ? ` (${app.pricing.freeTier})` : ''}. Paid plans start at $${app.pricing.startingPrice}/mo. ${app.pricing.exitCostNote ?? ''}`
+      : `${app.name} starts at $${app.pricing.startingPrice}/mo. Pricing is ${app.pricing.pricingModel.toLowerCase()}. ${app.pricing.exitCostNote ?? ''}`,
+  },
+  {
+    q: `Does ${app.name} have a free plan?`,
+    a: app.pricing.hasFree
+      ? `Yes — ${app.name} offers a free plan: ${app.pricing.freeTier ?? 'available for small stores'}.`
+      : `No, ${app.name} does not have a permanent free plan. ${competitors.find(c => c.pricing.hasFree) ? `If you need a free option, ${competitors.find(c => c.pricing.hasFree)!.name} offers one.` : 'Check for a free trial on their website.'}`,
+  },
+  {
+    q: `Is ${app.name} worth the price?`,
+    a: `${app.name} is best for: ${app.bestFor}. For that use case, it's strong value. However, ${app.notFor}.`,
+  },
+  {
+    q: `What is the cheapest ${category.name.toLowerCase()} app for Shopify?`,
+    a: (() => {
+      const sorted = [app, ...competitors].sort((a, b) => {
+        if (a.pricing.hasFree && !b.pricing.hasFree) return -1;
+        if (!a.pricing.hasFree && b.pricing.hasFree) return 1;
+        return a.pricing.startingPrice - b.pricing.startingPrice;
+      });
+      const cheapest = sorted[0];
+      return `${cheapest.name} is the most affordable option${cheapest.pricing.hasFree ? `, with a free plan` : `, starting at $${cheapest.pricing.startingPrice}/mo`}. ${cheapest.bestFor}.`;
+    })(),
+  },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+// Tier color coding
+function tierBg(i: number) {
+  if (i === 0 && app.pricing.hasFree) return 'bg-green-50 dark:bg-green-950 border-green-200 dark:border-green-800';
+  if (i === app.pricing.tiers.length - 1) return 'bg-blue-50 dark:bg-blue-950 border-blue-200 dark:border-blue-800';
+  return 'bg-white dark:bg-gray-950 border-gray-200 dark:border-gray-700';
+}
+---
+<Base title={title} description={description} canonicalUrl={canonicalUrl} noWebAppSchema={true}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={faqSchema} />
+  </Fragment>
+
+  <!-- Breadcrumb -->
+  <nav class="text-xs text-gray-400 dark:text-gray-500 mb-6 flex items-center gap-1.5 flex-wrap">
+    <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400">Home</a>
+    <span>/</span>
+    <a href="/compare/" class="hover:text-blue-600 dark:hover:text-blue-400">Compare</a>
+    <span>/</span>
+    <span class="text-gray-600 dark:text-gray-300">{app.name} Pricing</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="mb-8">
+    <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full mb-4">
+      <span>{category.icon}</span>
+      <span>{category.name}</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900 dark:text-gray-100">
+      {app.name} Pricing Plans & Costs (2026)
+    </h1>
+    <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl">
+      {app.name} {app.pricing.hasFree ? 'is free to start' : `starts at $${app.pricing.startingPrice}/mo`}.
+      Here's a complete breakdown of every plan, what you actually get, and how it compares to alternatives.
+    </p>
+  </div>
+
+  <!-- TL;DR pricing summary bar -->
+  <div class="mb-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+      <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Free Plan</div>
+      <div class={`text-lg font-bold ${app.pricing.hasFree ? 'text-green-600 dark:text-green-400' : 'text-gray-400 dark:text-gray-500'}`}>
+        {app.pricing.hasFree ? 'Yes' : 'No'}
+      </div>
+    </div>
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+      <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Starting Price</div>
+      <div class="text-lg font-bold text-gray-900 dark:text-gray-100">
+        {app.pricing.hasFree ? 'Free' : `$${app.pricing.startingPrice}/mo`}
+      </div>
+    </div>
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+      <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">Pricing Model</div>
+      <div class="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-tight mt-1">{app.pricing.pricingModel}</div>
+    </div>
+    <div class="bg-gray-50 dark:bg-gray-900 rounded-xl p-4 text-center border border-gray-200 dark:border-gray-700">
+      <div class="text-xs text-gray-500 dark:text-gray-400 mb-1">App Store Rating</div>
+      <div class="text-lg font-bold text-amber-600 dark:text-amber-400">⭐ {app.rating}</div>
+    </div>
+  </div>
+
+  <!-- Pricing tiers -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-5">{app.name} Pricing Plans</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-{Math.min(app.pricing.tiers.length, 4)} gap-4">
+      {app.pricing.tiers.map((tier, i) => (
+        <div class={`border rounded-xl p-5 ${tierBg(i)}`}>
+          <div class="flex items-start justify-between mb-3">
+            <div>
+              <div class="font-bold text-gray-900 dark:text-gray-100">{tier.name}</div>
+              {tier.price === 0 && <div class="text-xs text-green-600 dark:text-green-400 font-semibold">Forever Free</div>}
+            </div>
+            <div class="text-right">
+              {tier.price === null
+                ? <div class="text-lg font-bold text-gray-900 dark:text-gray-100">Custom</div>
+                : <div class="text-2xl font-bold text-gray-900 dark:text-gray-100">${tier.price}<span class="text-sm font-normal text-gray-500">/mo</span></div>
+              }
+            </div>
+          </div>
+          <div class="text-xs text-gray-500 dark:text-gray-400 mb-3">{tier.billingNote}</div>
+          <div class="text-sm text-gray-700 dark:text-gray-300 border-t border-gray-200 dark:border-gray-700 pt-3">
+            {tier.limits}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {app.pricing.exitCostNote && (
+      <div class="mt-4 p-4 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl">
+        <div class="text-xs font-bold text-amber-700 dark:text-amber-300 uppercase tracking-wide mb-1">⚠ Scaling Costs</div>
+        <p class="text-sm text-amber-800 dark:text-amber-300">{app.pricing.exitCostNote}</p>
+      </div>
+    )}
+  </section>
+
+  <!-- What's included -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">What You Get with {app.name}</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div>
+        <h3 class="text-sm font-semibold text-green-700 dark:text-green-400 uppercase tracking-wide mb-3">Strengths</h3>
+        <div class="space-y-2">
+          {app.pros.map(pro => (
+            <div class="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+              <span class="text-green-500 mt-0.5 shrink-0">✓</span>
+              <span>{pro}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div>
+        <h3 class="text-sm font-semibold text-red-600 dark:text-red-400 uppercase tracking-wide mb-3">Limitations</h3>
+        <div class="space-y-2">
+          {app.cons.map(con => (
+            <div class="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+              <span class="text-red-400 mt-0.5 shrink-0">✗</span>
+              <span>{con}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Price comparison table vs competitors -->
+  {competitors.length > 0 && (
+    <section class="mb-10">
+      <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+        {app.name} Price vs Competitors
+      </h2>
+      <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+              <th class="text-left px-4 py-3 font-semibold text-gray-600 dark:text-gray-400">App</th>
+              <th class="text-center px-3 py-3 font-semibold text-gray-600 dark:text-gray-400">Free</th>
+              <th class="text-left px-3 py-3 font-semibold text-gray-600 dark:text-gray-400">Starts At</th>
+              <th class="text-center px-3 py-3 font-semibold text-gray-600 dark:text-gray-400 hidden sm:table-cell">Rating</th>
+              <th class="text-center px-3 py-3 font-semibold text-gray-600 dark:text-gray-400 hidden md:table-cell">Compare</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-blue-100 dark:border-blue-900 bg-blue-50 dark:bg-blue-950">
+              <td class="px-4 py-3 font-bold text-blue-900 dark:text-blue-200">
+                {app.name} <span class="text-xs font-normal text-blue-600 dark:text-blue-400 ml-1">(this app)</span>
+              </td>
+              <td class="px-3 py-3 text-center">
+                {app.pricing.hasFree ? '✓' : '—'}
+              </td>
+              <td class="px-3 py-3 font-medium text-blue-900 dark:text-blue-200">
+                {app.pricing.hasFree ? 'Free' : `$${app.pricing.startingPrice}/mo`}
+              </td>
+              <td class="px-3 py-3 text-center hidden sm:table-cell text-amber-600 dark:text-amber-400">⭐ {app.rating}</td>
+              <td class="px-3 py-3 text-center hidden md:table-cell">—</td>
+            </tr>
+            {competitors.map((comp, i) => {
+              const cmpSlug = getCompareSlug(appId, comp.id);
+              return (
+                <tr class={`border-b border-gray-100 dark:border-gray-800 ${i % 2 === 0 ? 'bg-white dark:bg-gray-950' : 'bg-gray-50 dark:bg-gray-900'}`}>
+                  <td class="px-4 py-3 font-medium text-gray-900 dark:text-gray-100">{comp.name}</td>
+                  <td class="px-3 py-3 text-center text-green-600 dark:text-green-400">
+                    {comp.pricing.hasFree ? '✓' : <span class="text-gray-400 dark:text-gray-500">—</span>}
+                  </td>
+                  <td class="px-3 py-3 text-gray-700 dark:text-gray-300">
+                    {comp.pricing.hasFree ? 'Free' : `$${comp.pricing.startingPrice}/mo`}
+                    {comp.pricing.startingPrice < app.pricing.startingPrice && !app.pricing.hasFree && (
+                      <span class="text-xs text-green-600 dark:text-green-400 ml-1">↓ cheaper</span>
+                    )}
+                  </td>
+                  <td class="px-3 py-3 text-center hidden sm:table-cell text-amber-600 dark:text-amber-400">⭐ {comp.rating}</td>
+                  <td class="px-3 py-3 text-center hidden md:table-cell">
+                    {cmpSlug && (
+                      <a href={`/compare/${cmpSlug}/`} class="text-xs text-blue-600 dark:text-blue-400 hover:underline">
+                        Compare →
+                      </a>
+                    )}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )}
+
+  <!-- Is it worth it verdict -->
+  <section class="mb-10 bg-gray-50 dark:bg-gray-900 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
+    <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-3">Is {app.name} Worth the Price?</h2>
+    <div class="space-y-3 text-sm text-gray-700 dark:text-gray-300">
+      <p><strong>Buy {app.name} if:</strong> {app.bestFor}.</p>
+      <p><strong>Look elsewhere if:</strong> {app.notFor}.</p>
+      {cheaperAlt && (
+        <p>
+          <strong>Budget pick:</strong>{' '}
+          <a href={`/pricing/${cheaperAlt.id}/`} class="text-blue-600 dark:text-blue-400 hover:underline">
+            {cheaperAlt.name}
+          </a>{' '}
+          {cheaperAlt.pricing.hasFree ? 'has a free plan and' : `starts at $${cheaperAlt.pricing.startingPrice}/mo —`} {cheaperAlt.bestFor.toLowerCase()}.
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold mb-5 text-gray-900 dark:text-gray-100">Pricing FAQ</h2>
+    <div class="space-y-4">
+      {faq.map(item => (
+        <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.q}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Related links -->
+  <section>
+    <h2 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
+      Explore {app.name} Further
+    </h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <a href={`/alternatives/${appId}/`}
+        class="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+        <span class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 text-sm">
+          Best {app.name} Alternatives
+        </span>
+        <span class="text-blue-500 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform">→</span>
+      </a>
+      {PAIRS.filter(p => p.app1 === appId || p.app2 === appId).slice(0, 3).map(pair => (
+        <a href={`/compare/${pair.slug}/`}
+          class="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+          <span class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 text-sm">
+            {APPS[pair.app1]?.name} vs {APPS[pair.app2]?.name}
+          </span>
+          <span class="text-blue-500 dark:text-blue-400 group-hover:translate-x-0.5 transition-transform">→</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Base>

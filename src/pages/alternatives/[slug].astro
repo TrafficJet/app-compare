@@ -1,0 +1,313 @@
+---
+import { APPS, CATEGORIES, type CategoryId } from '../../data/apps';
+import { PAIRS } from '../../data/pairs';
+import Base from '../../layouts/Base.astro';
+
+export function getStaticPaths() {
+  return Object.keys(APPS).map(id => ({
+    params: { slug: id },
+    props: { appId: id },
+  }));
+}
+
+interface Props { appId: string; }
+const { appId } = Astro.props;
+const app = APPS[appId];
+
+// Find alternatives: same-category apps sorted by rating desc, up to 5
+const alternatives = Object.values(APPS)
+  .filter(a => a.id !== appId && a.categories.some(c => app.categories.includes(c)))
+  .sort((a, b) => b.rating - a.rating)
+  .slice(0, 5);
+
+function getCompareSlug(id1: string, id2: string): string | null {
+  const pair = PAIRS.find(p =>
+    (p.app1 === id1 && p.app2 === id2) || (p.app1 === id2 && p.app2 === id1)
+  );
+  return pair?.slug ?? null;
+}
+
+const primaryCategory = app.categories[0] as CategoryId;
+const category = CATEGORIES[primaryCategory];
+
+const title = `Best ${app.name} Alternatives for Shopify (2026)`;
+const description = `Looking for ${app.name} alternatives? Compare ${alternatives.length} top Shopify ${category.name.toLowerCase()} apps — pricing, features, and honest ratings from thousands of merchants.`;
+const canonicalUrl = `https://app-compare.com/alternatives/${appId}/`;
+
+const freeAlt = alternatives.find(a => a.pricing.hasFree);
+const faq = [
+  {
+    q: `What is the best alternative to ${app.name} on Shopify?`,
+    a: alternatives[0]
+      ? `${alternatives[0].name} is the highest-rated alternative to ${app.name}, with a ${alternatives[0].rating}/5 from ${alternatives[0].reviewCount.toLocaleString()} reviews. It's best for: ${alternatives[0].bestFor}.`
+      : `Several strong ${category.name.toLowerCase()} apps are available on the Shopify App Store. See the full comparison above.`,
+  },
+  {
+    q: `Why do merchants switch away from ${app.name}?`,
+    a: `Common reasons include: ${app.cons.slice(0, 2).join('; ').toLowerCase()}. ${app.notFor}.`,
+  },
+  {
+    q: `Is there a free alternative to ${app.name}?`,
+    a: freeAlt
+      ? `Yes — ${freeAlt.name} has a free plan${freeAlt.pricing.freeTier ? ` (${freeAlt.pricing.freeTier})` : ''}. It's a solid starting point before upgrading.`
+      : `Most ${category.name.toLowerCase()} apps offer free trials. Check each app's current pricing page for the latest free-tier details.`,
+  },
+  {
+    q: `How does ${app.name} compare on price?`,
+    a: app.pricing.hasFree
+      ? `${app.name} starts free${app.pricing.freeTier ? ` (${app.pricing.freeTier})` : ''}, then from $${app.pricing.startingPrice}/mo. ${app.pricing.exitCostNote ?? ''}`
+      : `${app.name} starts at $${app.pricing.startingPrice}/mo — ${app.pricing.pricingModel.toLowerCase()}. ${app.pricing.exitCostNote ?? ''}`,
+  },
+];
+
+const faqSchema = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+});
+
+const rankBadges = ['bg-yellow-400 text-yellow-900', 'bg-gray-300 text-gray-800', 'bg-amber-600 text-white'];
+---
+<Base title={title} description={description} canonicalUrl={canonicalUrl} noWebAppSchema={true}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={faqSchema} />
+  </Fragment>
+
+  <!-- Breadcrumb -->
+  <nav class="text-xs text-gray-400 dark:text-gray-500 mb-6 flex items-center gap-1.5 flex-wrap">
+    <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400">Home</a>
+    <span>/</span>
+    <a href="/compare/" class="hover:text-blue-600 dark:hover:text-blue-400">Compare</a>
+    <span>/</span>
+    <span class="text-gray-600 dark:text-gray-300">{app.name} Alternatives</span>
+  </nav>
+
+  <!-- Hero -->
+  <div class="mb-8">
+    <div class="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-950 px-3 py-1 rounded-full mb-4">
+      <span>{category.icon}</span>
+      <span>{category.name}</span>
+    </div>
+    <h1 class="text-3xl sm:text-4xl font-bold mb-3 text-gray-900 dark:text-gray-100">
+      Best {app.name} Alternatives for Shopify (2026)
+    </h1>
+    <p class="text-lg text-gray-500 dark:text-gray-400 max-w-2xl leading-relaxed">
+      {app.name} is {app.tagline.toLowerCase()}. But it's not right for everyone —
+      {app.notFor.toLowerCase()}. Here are the {alternatives.length} best alternatives
+      ranked by Shopify App Store rating and value.
+    </p>
+  </div>
+
+  <!-- Why switch box -->
+  <div class="mb-8 bg-amber-50 dark:bg-amber-950 border border-amber-200 dark:border-amber-800 rounded-xl p-5">
+    <h2 class="font-bold text-amber-900 dark:text-amber-200 mb-2 text-sm uppercase tracking-wide">Why Merchants Look for {app.name} Alternatives</h2>
+    <ul class="space-y-1.5">
+      {app.cons.map(con => (
+        <li class="flex items-start gap-2 text-sm text-amber-800 dark:text-amber-300">
+          <span class="text-amber-500 mt-0.5 shrink-0">⚠</span>
+          <span>{con}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Quick comparison table -->
+  <section class="mb-10">
+    <h2 class="text-lg font-bold text-gray-900 dark:text-gray-100 mb-4">Quick Comparison: {app.name} vs Alternatives</h2>
+    <div class="overflow-x-auto rounded-xl border border-gray-200 dark:border-gray-700">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="bg-gray-50 dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700">
+            <th class="text-left px-4 py-3 font-semibold text-gray-600 dark:text-gray-400">App</th>
+            <th class="text-center px-3 py-3 font-semibold text-gray-600 dark:text-gray-400 hidden sm:table-cell">Rating</th>
+            <th class="text-center px-3 py-3 font-semibold text-gray-600 dark:text-gray-400">Free Plan</th>
+            <th class="text-left px-3 py-3 font-semibold text-gray-600 dark:text-gray-400">Starting Price</th>
+            <th class="text-left px-3 py-3 font-semibold text-gray-600 dark:text-gray-400 hidden md:table-cell">Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Current app (what they're switching FROM) -->
+          <tr class="border-b border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 opacity-60">
+            <td class="px-4 py-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xs bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 px-1.5 py-0.5 rounded font-medium">Current</span>
+                <span class="font-medium text-gray-600 dark:text-gray-400">{app.name}</span>
+              </div>
+            </td>
+            <td class="px-3 py-3 text-center hidden sm:table-cell text-amber-600 dark:text-amber-400 font-medium">⭐ {app.rating}</td>
+            <td class="px-3 py-3 text-center">
+              {app.pricing.hasFree
+                ? <span class="text-green-600 dark:text-green-400 font-bold">✓</span>
+                : <span class="text-gray-400 dark:text-gray-500">—</span>}
+            </td>
+            <td class="px-3 py-3 text-gray-500 dark:text-gray-400 text-sm">
+              {app.pricing.hasFree ? 'Free' : `$${app.pricing.startingPrice}/mo`}
+            </td>
+            <td class="px-3 py-3 text-gray-500 dark:text-gray-400 text-xs hidden md:table-cell">{app.bestFor.slice(0, 60)}…</td>
+          </tr>
+          {alternatives.map((alt, i) => (
+            <tr class={`border-b border-gray-100 dark:border-gray-800 ${i % 2 === 0 ? 'bg-white dark:bg-gray-950' : 'bg-gray-50 dark:bg-gray-900'}`}>
+              <td class="px-4 py-3">
+                <div class="flex items-center gap-2">
+                  <span class={`text-xs font-bold px-1.5 py-0.5 rounded ${i < 3 ? rankBadges[i] : 'bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300'}`}>#{i + 1}</span>
+                  <span class="font-medium text-gray-900 dark:text-gray-100">{alt.name}</span>
+                </div>
+              </td>
+              <td class="px-3 py-3 text-center hidden sm:table-cell text-amber-600 dark:text-amber-400 font-medium">⭐ {alt.rating}</td>
+              <td class="px-3 py-3 text-center">
+                {alt.pricing.hasFree
+                  ? <span class="text-green-600 dark:text-green-400 font-bold">✓</span>
+                  : <span class="text-gray-400 dark:text-gray-500">—</span>}
+              </td>
+              <td class="px-3 py-3 text-gray-700 dark:text-gray-300 text-sm">
+                {alt.pricing.hasFree ? 'Free' : `$${alt.pricing.startingPrice}/mo`}
+              </td>
+              <td class="px-3 py-3 text-gray-600 dark:text-gray-400 text-xs hidden md:table-cell">{alt.bestFor.slice(0, 60)}…</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Detailed alternative cards -->
+  <section class="mb-10 space-y-6">
+    <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100">
+      Top {alternatives.length} Alternatives to {app.name}
+    </h2>
+    {alternatives.map((alt, i) => {
+      const compareSlug = getCompareSlug(appId, alt.id);
+      return (
+        <div class={`border-2 rounded-xl p-6 ${i === 0 ? 'border-yellow-400 dark:border-yellow-500 bg-yellow-50 dark:bg-yellow-950' : 'border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-950'}`}>
+          <div class="flex flex-wrap items-start justify-between gap-3 mb-4">
+            <div class="flex items-center gap-3">
+              <span class={`text-sm font-bold px-2.5 py-1 rounded-lg ${i === 0 ? 'bg-yellow-400 text-yellow-900' : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'}`}>
+                #{i + 1} {i === 0 ? 'Best Overall' : i === 1 ? 'Runner-Up' : ''}
+              </span>
+              <div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">{alt.name}</h3>
+                <p class="text-sm text-gray-500 dark:text-gray-400">{alt.tagline}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="text-center">
+                <div class="text-amber-600 dark:text-amber-400 font-bold text-lg">⭐ {alt.rating}</div>
+                <div class="text-xs text-gray-400 dark:text-gray-500">{alt.reviewCount.toLocaleString()} reviews</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Why it's better / different -->
+          <div class="bg-white dark:bg-gray-900 rounded-lg p-4 mb-4 border border-gray-200 dark:border-gray-700">
+            <div class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wide mb-1">
+              Why choose {alt.name} over {app.name}
+            </div>
+            <p class="text-sm text-gray-700 dark:text-gray-300">{alt.bestFor}</p>
+          </div>
+
+          <!-- Pricing + not for -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <div>
+              <div class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Pricing</div>
+              {alt.pricing.hasFree && (
+                <div class="text-xs text-green-600 dark:text-green-400 mb-1">✓ Free plan: {alt.pricing.freeTier}</div>
+              )}
+              <div class="text-sm text-gray-700 dark:text-gray-300">
+                From <strong>${alt.pricing.startingPrice}/mo</strong> — {alt.pricing.pricingModel}
+              </div>
+              {alt.pricing.exitCostNote && (
+                <div class="text-xs text-gray-400 dark:text-gray-500 mt-1">{alt.pricing.exitCostNote}</div>
+              )}
+            </div>
+            <div>
+              <div class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Not Ideal For</div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">{alt.notFor}</p>
+            </div>
+          </div>
+
+          <!-- Pros -->
+          <div class="mb-4">
+            <div class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Key Strengths</div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1">
+              {alt.pros.slice(0, 4).map(pro => (
+                <div class="flex items-start gap-2 text-sm text-gray-700 dark:text-gray-300">
+                  <span class="text-green-500 mt-0.5 shrink-0">✓</span>
+                  <span>{pro}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex flex-wrap gap-2">
+            <a href={alt.affiliateUrl || alt.shopifyAppUrl} target="_blank" rel="noopener nofollow sponsored"
+              class="text-sm px-4 py-2 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-lg font-medium hover:opacity-90 transition">
+              View on App Store →
+            </a>
+            {compareSlug && (
+              <a href={`/compare/${compareSlug}/`}
+                class="text-sm px-4 py-2 border border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-400 rounded-lg font-medium hover:bg-blue-50 dark:hover:bg-blue-950 transition">
+                {app.name} vs {alt.name} →
+              </a>
+            )}
+          </div>
+        </div>
+      );
+    })}
+  </section>
+
+  <!-- When to stay with current app -->
+  <section class="mb-10 bg-green-50 dark:bg-green-950 border border-green-200 dark:border-green-800 rounded-xl p-5">
+    <h2 class="font-bold text-green-900 dark:text-green-200 mb-3">When {app.name} Is Actually the Right Choice</h2>
+    <p class="text-sm text-green-800 dark:text-green-300 mb-3">{app.bestFor}.</p>
+    <ul class="space-y-1.5">
+      {app.pros.slice(0, 4).map(pro => (
+        <li class="flex items-start gap-2 text-sm text-green-800 dark:text-green-300">
+          <span class="text-green-600 mt-0.5 shrink-0">✓</span>
+          <span>{pro}</span>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <!-- FAQ -->
+  <section class="mb-10">
+    <h2 class="text-xl font-bold mb-5 text-gray-900 dark:text-gray-100">Frequently Asked Questions</h2>
+    <div class="space-y-4">
+      {faq.map(item => (
+        <div class="border border-gray-200 dark:border-gray-700 rounded-xl p-5">
+          <h3 class="font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.q}</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item.a}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Side-by-side compare links -->
+  {alternatives.filter(alt => getCompareSlug(appId, alt.id)).length > 0 && (
+    <section>
+      <h2 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
+        Head-to-Head Comparisons
+      </h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {alternatives.map(alt => {
+          const slug = getCompareSlug(appId, alt.id);
+          if (!slug) return null;
+          return (
+            <a href={`/compare/${slug}/`}
+              class="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+              <span class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 text-sm">
+                {app.name} vs {alt.name}
+              </span>
+              <span class="text-blue-500 dark:text-blue-400 ml-2 group-hover:translate-x-0.5 transition-transform">→</span>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+  )}
+</Base>
