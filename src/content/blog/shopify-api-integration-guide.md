@@ -6,6 +6,8 @@ description: "Learn how to integrate the Shopify API step by step. Covers REST v
 author: "Alex Morgan"
 tags: ["shopify api integration guide"]
 seoTitle: "Shopify API Integration Guide for 2026"
+heroImage: "/images/shopify-api-integration-guide/hero.jpg"
+heroImageAlt: "Developer writing Shopify API integration code on laptop with GraphQL query visible"
 ---
 
 # Shopify API Integration Guide for 2026
