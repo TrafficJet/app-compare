@@ -396,6 +396,49 @@ const faqSchema = JSON.stringify({
     });
   </script>
 
+  <!-- Alternatives & Pricing deep-links -->
+  <section class="mb-10">
+    <h2 class="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">Explore Further</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <a href={`/alternatives/${pair.app1}/`}
+        class="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+        <div>
+          <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-0.5">Alternatives</div>
+          <span class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 text-sm">
+            Best {app1.name} Alternatives →
+          </span>
+        </div>
+      </a>
+      <a href={`/alternatives/${pair.app2}/`}
+        class="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+        <div>
+          <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-0.5">Alternatives</div>
+          <span class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 text-sm">
+            Best {app2.name} Alternatives →
+          </span>
+        </div>
+      </a>
+      <a href={`/pricing/${pair.app1}/`}
+        class="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+        <div>
+          <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-0.5">Pricing</div>
+          <span class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 text-sm">
+            {app1.name} Pricing Plans →
+          </span>
+        </div>
+      </a>
+      <a href={`/pricing/${pair.app2}/`}
+        class="flex items-center justify-between border border-gray-200 dark:border-gray-700 rounded-xl p-4 hover:border-blue-400 dark:hover:border-blue-600 hover:bg-blue-50 dark:hover:bg-blue-950 transition-all group">
+        <div>
+          <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wide mb-0.5">Pricing</div>
+          <span class="font-medium text-gray-900 dark:text-gray-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 text-sm">
+            {app2.name} Pricing Plans →
+          </span>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <!-- Related Comparisons -->
   {related.length > 0 && (
     <section>
