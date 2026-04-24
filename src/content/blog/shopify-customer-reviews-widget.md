@@ -6,6 +6,8 @@ description: "Compare top Shopify customer reviews widgets in 2026. See features
 author: "Alex Morgan"
 tags: ["shopify customer reviews widget"]
 seoTitle: "Best Shopify Customer Reviews Widgets 2026 | App Compare"
+heroImage: "/images/shopify-customer-reviews-widget/hero.jpg"
+heroImageAlt: "Shopify product page displaying customer star ratings and written reviews with photos"
 ---
 
 # Best Shopify Customer Reviews Widgets in 2026
