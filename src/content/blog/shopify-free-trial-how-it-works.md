@@ -6,6 +6,8 @@ description: "Learn how Shopify's 3-day free trial works, what you can build, an
 author: "Alex Morgan"
 tags: ["shopify free trial how it works"]
 seoTitle: "Shopify Free Trial: How It Works in 2026 | App Compare"
+heroImage: "/images/shopify-free-trial-how-it-works/hero.jpg"
+heroImageAlt: "Shopify admin dashboard displayed on laptop screen with product editor and store settings visible"
 ---
 
 # Shopify Free Trial: How It Works in 2026
