@@ -6,6 +6,8 @@ description: "Complete Shopify Loox setup guide: install, configure emails, impo
 author: "Alex Morgan"
 tags: ["shopify loox reviews setup guide"]
 seoTitle: "Shopify Loox Reviews Setup Guide 2026 | App Compare"
+heroImage: "/images/shopify-loox-reviews-setup-guide/hero.jpg"
+heroImageAlt: "Shopify admin dashboard displaying product page with customer photo reviews and star ratings"
 ---
 
 # Shopify Loox Reviews Setup Guide (2026)
