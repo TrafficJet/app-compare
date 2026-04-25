@@ -6,6 +6,8 @@ description: "Compare 7 top Shopify themes for dropshipping in 2026. Speed, pric
 author: "Alex Morgan"
 tags: ["best shopify theme for dropshipping"]
 seoTitle: "Best Shopify Themes for Dropshipping 2026 | App Compare"
+heroImage: "/images/best-shopify-theme-for-dropshipping/hero.jpg"
+heroImageAlt: "Shopify dropshipping store displayed on mobile phone and laptop showing product pages and checkout"
 ---
 
 # Best Shopify Themes for Dropshipping in 2026
