@@ -6,6 +6,8 @@ description: "Learn proven Shopify store design strategies to boost conversions:
 author: "Alex Morgan"
 tags: ["shopify store design best practices"]
 seoTitle: "Shopify Store Design Best Practices for 2026 | App Compare"
+heroImage: "/images/shopify-store-design-best-practices/hero.jpg"
+heroImageAlt: "Shopify store homepage displaying product grid, navigation menu, and hero section on desktop"
 ---
 
 # Shopify Store Design Best Practices for 2026
