@@ -6,6 +6,8 @@ description: "Complete guide to installing and configuring AfterShip order track
 author: "Alex Morgan"
 tags: ["shopify aftership tracking setup"]
 seoTitle: "Shopify AfterShip Tracking Setup Guide 2026 | App Compare"
+heroImage: "/images/shopify-aftership-tracking-setup/hero.jpg"
+heroImageAlt: "Shopify dashboard displaying order tracking and shipping status overview"
 ---
 
 # Shopify AfterShip Tracking Setup Guide (2026)
