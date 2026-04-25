@@ -6,6 +6,8 @@ description: "Recover lost revenue with Shopify abandoned cart recovery. Email s
 author: "Alex Morgan"
 tags: ["shopify abandoned cart recovery"]
 seoTitle: "Shopify Abandoned Cart Recovery: Boost Sales in 2026"
+heroImage: "/images/shopify-abandoned-cart-recovery/hero.jpg"
+heroImageAlt: "Shopify checkout page displayed on laptop screen with customer entering payment information"
 ---
 
 # Shopify Abandoned Cart Recovery: Boost Sales in 2026
