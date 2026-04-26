@@ -6,6 +6,8 @@ description: "Discover the 10 most costly Shopify mistakes US store owners make 
 author: "Alex Morgan"
 tags: ["shopify mistakes to avoid"]
 seoTitle: "Shopify Mistakes to Avoid in 2026 | App Compare"
+heroImage: "/images/shopify-mistakes-to-avoid/hero.jpg"
+heroImageAlt: "E-commerce dashboard showing sales metrics, conversion rates, and analytics on computer monitor"
 ---
 
 # Shopify Mistakes to Avoid in 2026
