@@ -6,6 +6,8 @@ description: "Complete Shopify guide for beginners. Learn to set up your store, 
 author: "Alex Morgan"
 tags: ["shopify guide for beginners"]
 seoTitle: "Shopify Guide for Beginners: Start Selling in 2026 | App Compare"
+heroImage: "/images/shopify-guide-for-beginners/hero.jpg"
+heroImageAlt: "Beginner entrepreneur setting up their first Shopify store on a laptop"
 ---
 
 # Shopify Guide for Beginners: Start Selling in 2026
