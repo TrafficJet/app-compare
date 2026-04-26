@@ -6,6 +6,8 @@ description: "Master Shopify strategy with a step-by-step guide covering niche s
 author: "Alex Morgan"
 tags: ["shopify strategy"]
 seoTitle: "Shopify Strategy: Grow Your Store in 2026 | App Compare"
+heroImage: "/images/shopify-strategy/hero.jpg"
+heroImageAlt: "Shopify store dashboard displaying sales analytics, traffic, and growth metrics on computer screen"
 ---
 
 # Shopify Strategy: Grow Your Store in 2026
