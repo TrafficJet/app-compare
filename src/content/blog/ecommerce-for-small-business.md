@@ -6,6 +6,8 @@ description: "Launch your online store in 2026. Compare platforms, budget $1,500
 author: "Alex Morgan"
 tags: ["ecommerce for small business"]
 seoTitle: "Ecommerce for Small Business: Start & Grow in 2026 | App Compare"
+heroImage: "/images/ecommerce-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner setting up an online store on laptop at wooden desk"
 ---
 
 # Ecommerce for Small Business: Start & Grow in 2026
