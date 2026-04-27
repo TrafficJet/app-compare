@@ -6,6 +6,8 @@ description: "Learn how to start an online store from scratch. Step-by-step ecom
 author: "Alex Morgan"
 tags: ["ecommerce guide for beginners"]
 seoTitle: "Ecommerce Guide for Beginners: Start Selling in 2026 | App Compare"
+heroImage: "/images/ecommerce-guide-for-beginners/hero.jpg"
+heroImageAlt: "Beginner entrepreneur setting up an online store on laptop with product listings and shopping cart visible"
 ---
 
 # Ecommerce Guide for Beginners: Start Selling in 2026
