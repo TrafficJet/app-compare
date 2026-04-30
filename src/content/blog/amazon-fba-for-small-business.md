@@ -6,6 +6,8 @@ description: "Learn if Amazon FBA works for your small business. Calculate actua
 author: "Alex Morgan"
 tags: ["amazon fba for small business"]
 seoTitle: "Amazon FBA for Small Business: 2026 Costs & Setup Guide"
+heroImage: "/images/amazon-fba-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner organizing inventory boxes in a warehouse or storage facility"
 ---
 
 # Amazon FBA for Small Business: A Practical 2026 Guide
