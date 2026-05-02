@@ -6,6 +6,8 @@ description: "Learn 5 proven Shopify store tips to increase sales: speed optimiz
 author: "Alex Morgan"
 tags: ["best shopify store tips"]
 seoTitle: "Best Shopify Store Tips to Boost Sales in 2026 | App Compare"
+heroImage: "/images/best-shopify-store-tips/hero.jpg"
+heroImageAlt: "Shopify store dashboard displayed on laptop showing sales metrics and analytics"
 ---
 
 # Best Shopify Store Tips to Boost Sales in 2026
