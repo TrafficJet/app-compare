@@ -6,6 +6,8 @@ description: "Master Shopify theme selection, speed optimization, and mobile UX 
 author: "Alex Morgan"
 tags: ["best shopify theme tips"]
 seoTitle: "Best Shopify Theme Tips to Boost Sales in 2026 | App Compare"
+heroImage: "/images/best-shopify-theme-tips/hero.jpg"
+heroImageAlt: "Shopify theme editor showing customizable sections and product layout on desktop monitor"
 ---
 
 # Best Shopify Theme Tips to Boost Sales in 2026
