@@ -6,6 +6,8 @@ description: "Compare free & paid Shopify themes for small business. Performance
 author: "Alex Morgan"
 tags: ["shopify theme for small business"]
 seoTitle: "Best Shopify Themes for Small Business 2026 | App Compare"
+heroImage: "/images/shopify-theme-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner viewing Shopify store theme on mobile phone and laptop displays"
 ---
 
 # Best Shopify Themes for Small Business in 2026
