@@ -6,6 +6,8 @@ description: "Compare Shopify Payments tools, Shop Pay, Stripe & more. Lower fee
 author: "Alex Morgan"
 tags: ["shopify payments tools"]
 seoTitle: "Best Shopify Payments Tools for US Stores 2026 | App Compare"
+heroImage: "/images/shopify-payments-tools/hero.jpg"
+heroImageAlt: "Shopify checkout page displaying multiple payment options on a laptop screen"
 ---
 
 # Best Shopify Payments Tools for US Stores in 2026
