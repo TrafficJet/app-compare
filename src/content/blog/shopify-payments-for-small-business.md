@@ -6,6 +6,8 @@ description: "Complete guide to Shopify Payments for small business: fees, setup
 author: "Vladislav T."
 tags: ["shopify payments for small business"]
 seoTitle: "Shopify Payments for Small Business: 2026 Fees & Setup Guide"
+heroImage: "/images/shopify-payments-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner viewing Shopify Payments setup in admin dashboard on laptop"
 ---
 
 # Shopify Payments for Small Business: 2026 Guide
