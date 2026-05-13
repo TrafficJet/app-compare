@@ -6,6 +6,8 @@ description: "Learn how Shopify Shipping saves small businesses up to 88% on USP
 author: "Vladislav T."
 tags: ["shopify shipping for small business"]
 seoTitle: "Shopify Shipping for Small Business 2025 Guide | App Compare"
+heroImage: "/images/shopify-shipping-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner preparing and labeling a package at their desk for shipment"
 ---
 
 # Shopify Shipping for Small Business: 2025 Guide
