@@ -6,6 +6,8 @@ description: "Save up to 88% on USPS & UPS rates with Shopify Shipping. Setup gu
 author: "Vladislav T."
 tags: ["shopify shipping for small business"]
 seoTitle: "Shopify Shipping for Small Business: 2026 Rates & Setup Guide"
+heroImage: "/images/shopify-shipping-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner preparing and labeling a shipping box at workspace"
 ---
 
 # Shopify Shipping for Small Business: 2026 Guide
