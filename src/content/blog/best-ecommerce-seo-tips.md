@@ -6,6 +6,8 @@ description: "Learn proven ecommerce SEO tactics to boost rankings and sales. Ta
 author: "Vladislav T."
 tags: ["best ecommerce seo tips"]
 seoTitle: "Best Ecommerce SEO Tips to Grow Sales in 2026 | App Compare"
+heroImage: "/images/best-ecommerce-seo-tips/hero.jpg"
+heroImageAlt: "Ecommerce analytics dashboard showing product page SEO metrics and ranking data on laptop screen"
 ---
 
 # Best Ecommerce SEO Tips to Grow Sales in 2026
