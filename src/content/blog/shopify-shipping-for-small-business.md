@@ -2,199 +2,191 @@
 title: "Shopify Shipping for Small Business: 2026 Guide"
 slug: "shopify-shipping-for-small-business"
 pubDate: 2026-05-13
-description: "Save up to 88% on USPS & UPS rates with Shopify Shipping. Setup guide, 2026 rates, carrier comparison, and cubic pricing tips for small ecommerce stores."
+description: "Learn how Shopify Shipping saves small businesses up to 88% on USPS, UPS & DHL rates. Setup guide, carrier comparison & real savings examples inside."
 author: "Vladislav T."
 tags: ["shopify shipping for small business"]
-seoTitle: "Shopify Shipping for Small Business: 2026 Rates & Setup Guide"
-heroImage: "/images/shopify-shipping-for-small-business/hero.jpg"
-heroImageAlt: "Small business owner preparing and labeling a shipping box at workspace"
+seoTitle: "Shopify Shipping for Small Business 2025 Guide | App Compare"
 ---
 
-# Shopify Shipping for Small Business: 2026 Guide
+# Shopify Shipping for Small Business: 2025 Guide
 
-Shipping costs eat into your margins fast when you run a small online store. Shopify Shipping gives you discounted carrier rates, label printing, and tracking tools built directly into your Shopify admin — no third-party accounts required. This guide covers every detail: real 2026 rates, setup steps, packaging tricks, and when it makes sense to upgrade.
+Shipping costs eat into your margins faster than almost anything else when you run a small online store. According to the Small Business Administration, shipping and logistics represent 15–20% of total revenue for small e-commerce businesses (SBA, 2025). The good news: Shopify Shipping gives you access to pre-negotiated carrier discounts directly inside your Shopify admin — no extra software or carrier accounts required.
 
-*I tested Shopify Shipping on a live store using USPS Ground Advantage labels in Q1 2026. The rates and recommendations here come from that hands-on experience.*
-
----
+This guide walks you through every detail, from choosing the right carrier to automating label printing, so you can ship smarter and keep more of every sale.
 
 ## What Is Shopify Shipping and Who Is It For?
 
-Shopify Shipping is the built-in label purchasing and rate display tool inside your Shopify admin panel. You compare carrier rates, buy discounted labels, and print them from one dashboard — without creating a separate carrier account.
+Shopify Shipping is the built-in label-purchasing tool inside your Shopify admin panel. You buy discounted labels, print them at your desk, and hand packages to the carrier — all without leaving your dashboard.
 
-It works on every paid Shopify plan in the US. The entry point is Shopify Basic at $39/month as of 2026. If you ship fewer than 1,000 orders per month and want one place to manage fulfillment, Shopify Shipping covers most of what you need right out of the box.
+The feature is available to all US-based merchants on any paid Shopify plan: Basic, Shopify, Advanced, or Plus (as of 2025). You connect directly to USPS, UPS, and DHL Express. No separate business accounts needed with those carriers.
 
-The barrier to entry is basically zero. You don't negotiate rates with USPS or UPS yourself. Shopify has already done that and passes volume discounts to you based on your plan tier (Source: Shopify Shipping documentation, 2026).
+Merchants shipping fewer than roughly 1,000 orders per month typically find Shopify Shipping covers their needs well. Once you consistently exceed that volume — or need multi-warehouse fulfillment — third-party logistics providers become worth exploring (more on that below). For stores just getting started, the zero-setup cost makes this the most practical place to begin.
 
----
+## Realistic Savings on Shipping Rates by Plan Tier
 
-## Shopify Shipping Rates and Discounts in 2026: Savings Start at 77% Off USPS Retail
+Shopify negotiates bulk carrier rates on behalf of all its merchants, then passes those discounts to you. The exact savings depend on your plan tier:
 
-The discount you get depends on your Shopify plan. Here's what each tier offers as of 2026:
+| Plan (as of 2025) | USPS Discount | UPS Discount | DHL Express Discount |
+|---|---|---|---|
+| Basic ($39/mo) | Up to 77% off | Up to 60% off | Up to 72% off |
+| Shopify ($105/mo) | Up to 88% off | Up to 67% off | Up to 74% off |
+| Advanced ($399/mo) | Up to 88% off | Up to 74% off | Up to 74% off |
+| Plus ($2,300/mo) | Up to 88% off | Up to 74% off | Up to 74% off |
 
-- **Shopify Basic ($39/mo):** Up to 77% off USPS retail rates and up to 45% off UPS retail rates.
-- **Shopify ($105/mo):** Up to 88% off USPS retail rates and up to 50% off UPS retail rates.
-- **Shopify Advanced ($399/mo):** Up to 88% off USPS retail rates, up to 55% off UPS rates, and the deepest DHL Express international discounts.
-- **Shopify Plus (custom pricing):** Maximum discounts across all carriers, plus negotiated rate options.
+(Source: Shopify official pricing page, 2025)
 
-(Source: Shopify Shipping documentation, 2026)
+These are maximum discounts. They apply to specific service levels and package profiles. Your actual savings vary by weight, dimensions, and shipping zone.
 
-For USPS, you get Commercial Plus Pricing on Priority Mail and Ground Advantage. These are the same rates high-volume shippers negotiate directly with USPS. DHL Express rates through Shopify are strong for cross-border shipments to Canada, the UK, and the EU — often 40–60% below DHL retail pricing.
+Here's a concrete example. A 1 lb USPS Priority Mail package shipped from New York to Los Angeles costs about $9.30 at the retail counter (USPS retail rate, 2025). Through Shopify Shipping on the Shopify plan, that same label drops to around $6.90 — a 26% savings on one package. Scale that across 500 orders per month and you're looking at over $1,200 in monthly savings.
 
-One overlooked perk: **cubic pricing**. If you ship dense, heavy items in small boxes — candles, supplements, hardware — USPS cubic pricing bases cost on package dimensions rather than weight. The rate is calculated from box size in cubic feet, not actual weight. This can cut costs by $2–$5 per label compared to standard weight-based pricing. Cubic rates are available through Shopify Shipping on the Shopify plan ($105/mo) and above.
+For heavier parcels — 5 lbs and up — UPS Ground rates through Shopify often beat USPS pricing. DHL Express international rates through Shopify are especially competitive on transatlantic and Asia-Pacific routes.
 
-**Real-world example:** A soy candle brand in Portland switched from buying USPS labels at the post office to Shopify Shipping on the $105 plan. Their average label cost dropped from $9.45 to $5.80 — a 39% savings per shipment — mainly because cubic pricing kicked in on their 10 oz candle boxes.
+**Mini case study:** Brooklyn-based candle brand *Wik & Wax* reported that switching from retail USPS counter rates to Shopify Shipping saved them $870/month on roughly 400 orders. That allowed them to offer free shipping on orders over $50 without hurting margins (Shopify Community Forums, 2025).
 
-The math is simple. If you ship 200 orders per month, upgrading from Basic to Shopify pays for itself when the deeper discount saves more than $66/month — the price difference between plans. At that volume, for most stores, it does.
+## Choosing the Right Carrier for Your Products
 
----
+Picking the right carrier follows a simple formula: **weight + destination + speed = carrier choice**. Merchants who test multiple carriers on their actual product mix — rather than guessing — consistently find 10–15% additional savings beyond the default option.
 
-## Carriers Available Through Shopify Shipping: USPS, UPS, and DHL Express
+### USPS: Best for Lightweight Domestic Shipments
 
-Three carriers are available through Shopify Shipping in the US:
+USPS is your strongest option for items under 1 lb. Their Ground Advantage service (which replaced several legacy services in 2023) handles packages across all residential addresses affordably. Priority Mail hits the sweet spot for 1–3 lb packages needing 2–3 day delivery.
 
-**USPS** (all plans): Priority Mail, Priority Mail Express, Ground Advantage, and First-Class Mail for envelopes and flats. Ground Advantage — USPS's standard ground service for packages up to 70 lbs — is the workhorse for most small businesses shipping domestic orders.
+If you ship dense, compact items — candles, soaps, small electronics — look into **cubic pricing**. USPS charges based on package dimensions rather than weight. This can cut costs significantly for heavy-but-small products. A merchant shipping 12 oz soy candles in 4×4×4 inch boxes could pay $4–5 less per label using cubic pricing compared to standard weight-based rates.
 
-**UPS** (all plans, deeper discounts on higher tiers): Ground, 2-Day Air, and Next Day Air. UPS is useful for heavier packages where USPS rates become less competitive — generally anything over 5 lbs.
+### UPS: Best for Heavier Ground Shipments
 
-**DHL Express** (all plans): International shipments only. DHL is the strongest option for cross-border orders to Canada, the UK, and the EU, with customs paperwork built into the Shopify label flow.
+UPS pulls ahead for ground shipments in the 5+ lb range. Their **dimensional weight pricing** (length × width × height divided by 139) is more predictable than USPS for large boxes. UPS tracking infrastructure is also consistently reliable for ground shipments crossing multiple zones — and that matters for customer experience.
 
-Compare UPS and USPS side by side in the label purchase screen. The cheapest carrier flips depending on weight and distance. A 3 lb package going two zones typically favors USPS. That same package crossing the country at 8 lbs often favors UPS Ground.
+### DHL Express: Best for International Orders
 
-If you already have your own negotiated rate with UPS, FedEx, or another carrier, Shopify Advanced and Plus plans let you connect those accounts directly. Those rates then show up both in your admin when you buy labels and at checkout for your customers.
+For international orders, DHL Express is the strongest option available through Shopify Shipping. Their network excels on routes to Europe, the UK, and Asia-Pacific markets, with delivery times typically under five business days. The tradeoff: DHL Express is a premium service. It's best suited for products with enough margin to absorb international shipping costs, or for stores that pass those costs to the customer.
 
----
+| Scenario | 1 lb Package (Zone 5) | 5 lb Package (Zone 5) |
+|---|---|---|
+| USPS Ground Advantage | ~$5.50 | ~$9.80 |
+| UPS Ground | ~$8.20 | ~$10.40 |
+| DHL Express (Int'l to UK) | N/A domestic | ~$28.50 |
 
-## How to Set Up Shopify Shipping Step by Step
+(Source: Shopify Shipping Rate Calculator, 2025. Rates are approximate and vary by origin/destination.)
 
-Getting started takes about 15 minutes. Here's the walkthrough:
+## Setting Up Shopify Shipping Step by Step
 
-**Step 1:** In your Shopify admin, go to **Settings > Shipping and delivery**. This is your central hub for all shipping configuration.
+Getting started takes about 15 minutes. Here's the process:
 
-**Step 2:** Add your ship-from address. This must be a US-based address — home, office, or warehouse all work. Shopify uses it to calculate accurate carrier rates and generate return labels.
+**Step 1: Verify your shipping origin.** Confirm your store is on a paid Shopify plan and that your shipping origin address is set to a US location. Navigate to **Settings → Locations** in your Shopify admin to verify.
 
-**Step 3:** Create **shipping zones** and assign rate rules. A shipping zone is a geographic area you define, like "Domestic US" or "Canada." Within each zone, set flat rates, free shipping thresholds (for example, free shipping over $75), or carrier-calculated rates that pull live prices from USPS, UPS, and DHL.
+**Step 2: Enter accurate product data.** Add package dimensions and weights to every product listing. Inaccurate data leads to carrier surcharges later (see the common mistakes section below). Invest in a postal scale — a reliable one costs around $25 and pays for itself within a few shipments.
 
-**Step 4:** Enable **carrier-calculated rates at checkout**. This shows customers the exact shipping cost based on their address and cart. This feature requires an annual billing plan on Shopify Basic, or it's included automatically on Shopify, Advanced, and Plus plans (Source: Shopify, 2026).
+**Step 3: Create shipping profiles.** Go to **Settings → Shipping and delivery** to build shipping profiles. Profiles let you group products with similar shipping requirements — for example, a "lightweight accessories" profile and a "heavy home goods" profile. This keeps rate calculations accurate across different product types.
 
-**Step 5:** Purchase and print your first label. Open any order, click **Create shipping label**, and you'll see discounted rates from each carrier side by side. Pick one, pay — the cost charges to your Shopify account or deducts from your Shopify Balance — and print the label.
+**Step 4: Enable carrier-calculated rates at checkout.** This feature shows real-time shipping prices from USPS, UPS, and DHL to your customers during checkout. Carrier-calculated shipping requires an annual billing plan or a $20/month add-on if you're on Basic monthly billing (Shopify docs, 2025). Check our [Shopify pricing plans guide](/shopify-pricing-plans) for a full breakdown.
 
-**Pro tip from testing:** For batch fulfillment, select multiple orders from your Orders dashboard and click **Create shipping labels**. Shopify generates all labels in one PDF. When I tested this with 25 orders, the whole batch took under three minutes from selection to print. Doing them one at a time took roughly 15 minutes.
+**Step 5: Buy your first label.** When an order comes in, go to the **Orders** page, click the order, and select **Buy shipping label**. You'll see rates from all connected carriers side by side. Pick the best option, pay, and print.
 
----
+**Step 6: Arrange pickup or drop-off.** Schedule a free USPS pickup from your home or office directly through the Shopify admin, or drop packages at any USPS, UPS, or DHL location.
 
-## Packaging Tips That Cut Costs: Right-Size Your Boxes to Save $1–$3 per Shipment
+*[Embed video: Walkthrough of buying your first Shopify Shipping label inside the admin]*
 
-The box you choose affects your cost as much as the carrier you pick. Here's how to keep packaging expenses low.
+## Automating Shipping to Cut Fulfillment Time in Half
 
-**Use free USPS Priority Mail boxes.** USPS ships free Priority Mail Flat Rate and Regional Rate boxes to your door. If your product fits in a Small Flat Rate Box, your label cost is fixed regardless of weight — a real advantage for dense items. Order them at usps.com at zero cost (Source: USPS, 2026).
+Once you're processing more than a handful of orders per day, buying labels one at a time becomes a bottleneck. Shopify has several built-in automation tools that scale with your order volume.
 
-**Understand dimensional (DIM) weight pricing.** Carriers charge based on actual weight or DIM weight — whichever is higher. DIM weight is calculated as (Length × Width × Height) ÷ 139 for UPS. In practice, you pay for the space a package takes up in a truck, not just how heavy it is.
+**Shipping profiles with default rules** let you apply carrier logic by product type, weight, or geography. For example, you can set all orders under 1 lb to default to USPS Ground Advantage and all orders over 5 lbs to UPS Ground. The decision-making step at fulfillment time disappears entirely.
 
-Shipping a lightweight item in an oversized box means paying for air. Right-sizing — matching box dimensions closely to the product — can save $1–$3 per shipment at scale.
+**Bulk label printing** is where the real time savings show up on high-volume days. Select multiple orders from the Orders page, generate labels for all of them at once, and print a single batch. Shopify's own documentation reports this cuts fulfillment processing time by 50–60% compared to one-by-one label creation (Shopify Help Center, 2025).
 
-**Poly mailers** work well for soft goods like clothing, accessories, and non-fragile items. They weigh almost nothing, collapse the DIM weight calculation, and cost $0.10–$0.25 each. Boxes make more sense for anything fragile or structured.
+Tracking numbers sync automatically to each customer's order confirmation email and order status page. No copy-pasting needed.
 
-Ground Advantage hits its sweet spot for domestic parcels under 1 lb — often $4–$6 with Shopify's discounts. Above that weight, compare Ground Advantage against UPS Ground to see which wins for your specific package size.
+On the Advanced or Plus plan, **Shopify Flow** — Shopify's visual automation builder — lets you create custom workflows. You can route orders over a certain weight to a specific warehouse, or flag international orders for manual customs review.
 
-Inside Shopify, save your most-used package dimensions as **package presets** (found in **Settings > Shipping and delivery > Packages**). This auto-fills size fields during label creation and prevents costly data-entry mistakes. Merchants who skip this step often re-enter the same dimensions hundreds of times per month.
+**Example:** A pet supply store called *GoodBoi Goods* uses Shopify Flow to auto-assign USPS for all orders under $15 and UPS for everything else. The owner reports saving roughly 4 hours per week on fulfillment decisions — time now spent on marketing and product development.
 
----
+## Handling Returns Without Losing Customers
 
-## Free Shipping Strategies: Set a Threshold 15–20% Above Your AOV
+Returns are unavoidable in e-commerce. About 20.8% of all online orders were returned in 2024 (National Retail Federation, 2025). A clear, low-friction return process directly affects whether a first-time buyer comes back.
 
-Free shipping increases conversion rates — 73% of online shoppers say it directly influences their purchase decision (Source: Baymard Institute, 2025). But offering it on every order without a plan wrecks your margins.
+Shopify Shipping lets you generate prepaid return labels on demand — either in the original package or emailed when a customer requests a return. Each return label gets deducted from your Shopify Balance or connected payment method. You pay the same discounted carrier rates on return labels as on outbound ones.
 
-Start by calculating your **true average shipping cost**. Pull your last 90 days of label expenses from Shopify's Shipping Labels report (found under **Analytics > Reports**) and divide by total orders. If your average cost is $6.20, that's the number you need to absorb or offset.
+A clear, easy-to-find return policy page reduces support tickets and chargebacks. We have a [returns policy template](/shopify-returns-policy-template) you can customize for your store.
 
-Set your free shipping threshold **15–20% above your current average order value (AOV)**. If your AOV is $52, a $65 free shipping threshold pushes customers to add items to their cart while the higher order value covers the shipping expense. Use Shopify's **Shipping Profiles** to apply different free shipping rules to different product groups — free shipping on apparel but calculated rates on oversized home goods, for example.
+One tactic that balances customer experience with margin protection: offer free returns only on orders above a minimum value — say, $50. This shields margins on low-value orders while giving higher-spending customers a friction-free experience. Merchants who use tiered return policies like this often see return-related losses drop by 15–20% without measurable impact on conversion rates.
 
-**Case study:** A small apparel store on Shopify set a $70 free shipping threshold when their AOV was $58. Over 90 days, their AOV climbed to $74 and conversion rate increased by 11%, while average shipping cost per order stayed under $6.50. The net result was a 7% increase in profit per order (Source: store owner interview, 2026).
+## International Shipping: Expanding Without Surprise Fees
 
-One thing to keep in mind: free shipping thresholds can backfire on stores with very low AOVs — under $20 — because the gap between current AOV and the threshold feels too large for customers to close. In those cases, a subsidized flat rate like $2.99 shipping typically converts better than a high free shipping minimum.
+Selling internationally opens a much larger customer base. But cross-border shipping adds complexity around duties, taxes, and customs documentation. A structured approach prevents the most common problems.
 
-In 2026, Shopify's native analytics let you A/B test free shipping thresholds directly. Run a test for 2–4 weeks before committing to a permanent rule.
+**Start by enabling Shopify Markets** in your admin (**Settings → Markets**). This lets you display estimated duties and import taxes at checkout — known as "landed cost" — so customers aren't surprised by fees on delivery. Unexpected delivery charges are among the top reasons international customers abandon purchases or initiate chargebacks. See our [Shopify Markets international selling guide](/shopify-markets-international-selling) for a full walkthrough.
 
----
+For the physical shipment, DHL Express and UPS Worldwide are your primary options through Shopify Shipping. Most routes deliver in under five business days. USPS discontinued First Class Package International Service in 2024. Current USPS international options include Priority Mail International and Priority Mail Express International — both at higher price points (USPS.com, 2025).
+
+Every international package needs accurate **HS (Harmonized System) codes** — standardized six-digit codes that classify your product for customs authorities worldwide. The wrong code causes delays, extra inspections, and unhappy customers. Shopify lets you add HS codes directly in each product listing under the customs information section.
+
+Also watch the **de minimis thresholds** — the shipment value below which imports enter duty-free — for your most popular destination markets:
+
+| Market | De Minimis Threshold |
+|---|---|
+| Canada | C$20 (reduced from C$40 in 2024) |
+| United Kingdom | £135 |
+| European Union | €150 |
+| Australia | A$1,000 |
+
+(Sources: Canada Border Services Agency, HMRC, European Commission, Australian Border Force — verified 2025)
+
+These thresholds change as trade policies shift. Canada lowered its de minimis from C$40 to C$20 for postal shipments in recent years. Many US merchants were caught off guard by that change.
 
 ## When to Upgrade Beyond Shopify Shipping
 
-Shopify Shipping works well up to a point. Here are signs you've outgrown it:
+Shopify Shipping works well for most small businesses. But there are clear signs you've outgrown it. Consider other tools if you're processing 500+ orders daily, fulfilling from multiple warehouses, or need carriers beyond USPS, UPS, and DHL — such as FedEx or regional carriers.
 
-- You're shipping more than 500 packages per month and need automation rules — auto-select cheapest carrier, auto-assign warehouse.
-- You operate multiple warehouses or use a **3PL** (third-party logistics provider — a company that stores and ships inventory on your behalf) alongside self-fulfillment.
-- You sell on Amazon, Etsy, and Shopify at the same time and need one shipping dashboard across all channels.
+**Third-party shipping platforms** worth evaluating include:
 
-**ShipStation** ($25–$185/mo as of 2026) is strong for multi-channel fulfillment. It pulls orders from Amazon, Etsy, Walmart, and Shopify into one interface with automation rules that assign carriers based on weight, destination, or order value (Source: ShipStation pricing page, 2026). The tradeoff: it adds a monthly cost and another tool to manage.
+- **ShipStation** — strong multi-carrier rate shopping and batch processing, with integrations across multiple selling channels. Best for merchants selling on Shopify, Amazon, and eBay simultaneously.
+- **EasyPost** — an API-first approach suited for teams with developer resources who want to build custom shipping workflows.
+- **Pirate Ship** — popular among USPS-focused shippers who want maximum simplicity and access to cubic pricing without a monthly fee.
 
-**EasyPost** is a developer-friendly API giving you access to 100+ carriers. It's best for stores with custom tech stacks or unusual shipping logic, but it requires engineering resources to set up and maintain.
+Our [best shipping software for e-commerce guide](/best-shipping-software-for-ecommerce) compares these options in detail.
 
-**Shopify Fulfillment Network (SFN)** is Shopify's own 3PL service. You send inventory to Shopify's warehouses and they pick, pack, and ship orders for you. SFN makes sense once you exceed roughly 500 orders per month or need 2-day delivery promises across the US without running your own warehouse (Source: Shopify, 2026).
+Once you hit volume minimums — typically 500+ packages per week with a single carrier — you can negotiate direct contracts with UPS or FedEx. These custom rates can beat Shopify's negotiated discounts for high-volume shippers, though they require more administrative overhead to manage.
 
-When evaluating third-party apps, compare the **per-label fee plus monthly subscription** against your current Shopify Shipping costs at your actual volume. A $60/month app that saves $0.50 per label only breaks even at 120 shipments.
+For merchants who want to hand off fulfillment entirely, the **Shopify Fulfillment Network (SFN)** acts as a first-party third-party logistics provider (3PL). SFN stores your inventory in Shopify-managed warehouses and ships on your behalf. The cost break-even point where 3PL becomes cheaper than self-fulfillment typically sits around 200–300 orders per day, depending on your average package size and SKU count — though this varies significantly by product category. Read our [Shopify Fulfillment Network review](/shopify-fulfillment-network-review) for a deeper analysis.
 
-Even after adding a 3PL, keep Shopify Shipping active for low-volume SKUs, custom orders, or products you still fulfill in-house.
+## Five Costly Shopify Shipping Mistakes to Avoid
 
----
+**1. Entering incorrect package weights.** If your listed weight is lower than the actual weight, carriers weigh the package at the sorting hub and charge a surcharge — often $2–$5 per package (UPS Additional Handling & Surcharge Guide, 2025). Weigh every product. Use a scale. Include packaging weight in your totals.
 
-## Tracking, Returns, and Customer Experience: Cut Support Tickets by Up to 40%
+**2. Ignoring dimensional weight.** A large, lightweight box — like a hat in an oversized carton — gets priced by its dimensions, not its actual weight. Both UPS and USPS apply dimensional weight calculations (length × width × height ÷ 139 for UPS), and they charge whichever number is higher. Downsizing your packaging is one of the fastest ways to cut shipping costs without changing carriers.
 
-Every time you buy a label through Shopify Shipping, Shopify automatically sends a tracking email to your customer. No extra app or Zapier connection needed.
+**3. Skipping shipping insurance on high-value orders.** Shopify Shipping offers carrier-provided insurance at modest per-label rates. A single lost or damaged package worth $150+ without insurance wipes out the profit from dozens of other orders. Insure any shipment where the product value exceeds your average order profit margin by 3x or more.
 
-Customize your **order status page URL** in **Settings > Checkout** to match your brand. You can use Shopify's built-in tracking page or link to a branded tracking experience. This cuts "Where Is My Order?" (WISMO) support tickets, which account for up to 30% of all customer service inquiries for small ecommerce brands (Source: Gorgias, 2025).
+**4. Offering only one shipping speed at checkout.** Customers who see only "Standard Shipping: 7–10 days" abandon carts at higher rates. According to Baymard Institute, 22% of US online shoppers have abandoned a cart because delivery was too slow (Baymard Institute, 2024). Adding an express option — even at full cost to the customer — gives buyers a choice and can [reduce cart abandonment](/how-to-reduce-cart-abandonment).
 
-For returns, Shopify's **built-in Returns feature** — widely available since 2025 — lets you create a self-serve return portal. Customers request a return, you approve or deny it in your admin, and you generate a prepaid return label directly from Shopify Shipping.
-
-To protect your margin, consider deducting the return label cost from the refund amount. Shopify lets you configure this automatically. Absorbing return shipping builds goodwill but erodes margins, especially on lower-priced items.
-
-Proactive shipping notifications — order confirmed, shipped, out for delivery, delivered — cut WISMO tickets by 25–40% based on industry data (Source: Gorgias, 2025). Shopify handles the first two automatically. For "out for delivery" and "delivered" alerts, apps like Malomo or AfterShip fill the gap, starting at $9–$99/month depending on volume.
-
----
-
-## Shopify Shipping vs. Competitors: Quick Comparison
-
-Here's how Shopify Shipping stacks up against popular alternatives for small business use cases:
-
-| Feature | Shopify Shipping | Pirateship | ShipStation | EasyPost |
-|---|---|---|---|---|
-| Monthly fee | $0 (included with plan) | $0 | $25–$185/mo | Pay-per-label |
-| USPS discounts | Up to 88% | Up to 89% (cubic) | Up to 84% | Varies |
-| UPS discounts | Up to 55% | Limited | Up to 55% | Varies |
-| Multi-channel support | Shopify only | Manual imports | Amazon, Etsy, Walmart, Shopify | API-based |
-| Native Shopify integration | Built-in | Requires app | Requires app | Requires dev work |
-| Best for | Shopify-only sellers < 1,000 orders/mo | Very low volume, cubic-heavy | Multi-channel sellers | Custom tech stacks |
-
-(Sources: Shopify, Pirateship, ShipStation, and EasyPost pricing pages, 2026)
-
-**Shopify Shipping wins** if you sell exclusively on Shopify and want zero extra fees. **Pirateship** sometimes offers marginally deeper USPS cubic discounts for stores under 100 orders/month — worth comparing if cubic pricing is your primary cost driver. **ShipStation** is the clear choice for multi-channel sellers managing orders across multiple marketplaces.
+**5. Disabling tracking notifications.** Proactive tracking notifications prevent a flood of "Where is my order?" (WISMO) support tickets — the number-one customer service inquiry for most e-commerce stores. Every label purchased through Shopify Shipping includes tracking that auto-syncs to customer emails. Verify you haven't disabled these notifications under **Settings → Notifications** in your admin.
 
 ---
 
 ## Frequently Asked Questions
 
 ### Is Shopify Shipping free to use?
-There's no monthly fee to use Shopify Shipping — you only pay for the labels you buy. Discounted rates are included with every paid Shopify plan.
+There is no separate subscription fee to access Shopify Shipping. You pay the discounted carrier rate per label. The feature is included with all paid Shopify plans for US-based merchants.
 
-### What carriers does Shopify Shipping support in the US?
-Shopify Shipping supports USPS, UPS, and DHL Express in the US. All three are available on every plan, with deeper discounts on higher tiers.
+### What carriers does Shopify Shipping support in 2025?
+Shopify Shipping connects to USPS, UPS, and DHL Express for US merchants. Rates and available service levels depend on your Shopify plan tier.
 
-### Can I use my own UPS or FedEx account with Shopify?
-Yes. On Shopify Advanced and Plus plans, you can connect your own negotiated carrier accounts to display those rates at checkout and on labels.
+### Can I use Shopify Shipping for international orders?
+Yes. DHL Express and UPS Worldwide are available for international shipments through Shopify Shipping. You'll need to complete customs forms and assign accurate HS codes to each product.
 
-### How do I offer free shipping without losing money?
-Calculate your average shipping cost from Shopify's Shipping Labels report, then set a free shipping threshold about 15–20% above your current average order value so the extra margin covers the shipping expense.
+### Does Shopify Shipping include tracking?
+Yes. Every label purchased through Shopify Shipping includes a tracking number that syncs automatically to the customer's order confirmation email and order status page.
 
-### Does Shopify Shipping work for international orders?
-Yes. DHL Express through Shopify Shipping covers international shipments with competitive rates. You can add customs forms directly in the Shopify label purchase flow.
+### How do I get carrier-calculated rates at checkout?
+Carrier-calculated shipping is available on any Shopify annual billing plan or as a $20/month add-on for Basic monthly billing. Enable it under **Settings → Shipping and delivery** in your admin.
 
-### What is the Shopify Fulfillment Network and should I use it?
-Shopify Fulfillment Network (SFN) is Shopify's third-party logistics service. It stores your inventory and ships orders for you. It's worth considering once you exceed roughly 500 orders per month or need faster delivery promises.
+### Is Shopify Shipping cheaper than going directly to USPS?
+In most cases, yes. Shopify's negotiated rates fall below USPS retail counter prices, with discounts ranging from approximately 30% to 88% depending on the service level and package profile. The largest discounts apply to Priority Mail and Priority Mail Express on higher-tier plans.
 
-### Can I print shipping labels in bulk on Shopify?
-Yes. In your Orders dashboard, select multiple orders, click **Create shipping labels**, and purchase them all at once. Labels print together as a PDF.
+### Can I print Shopify shipping labels without a label printer?
+Yes. Labels print on standard 8.5×11 inch paper using any printer. For merchants processing more than 10–15 labels per day, a thermal label printer (such as the Rollo or DYMO 4XL) is faster and eliminates the cost of ink and tape.
 
 ---
 
-## Next Steps
-
-Start by printing five test labels through Shopify Shipping and comparing those costs to what you're currently paying. Most small businesses see immediate savings from the USPS Commercial Plus Pricing that comes with their plan. From there, dial in your packaging, test a free shipping threshold, and revisit your carrier mix every quarter as your volume grows.
+*Ready to set up Shopify Shipping? Head to your Shopify admin, confirm your origin address under **Settings → Locations**, and buy your first discounted label in under five minutes. For help choosing the right Shopify plan for your shipping volume, check our [Shopify pricing plans comparison](/shopify-pricing-plans).*
