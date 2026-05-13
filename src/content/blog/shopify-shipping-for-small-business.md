@@ -6,6 +6,8 @@ description: "Learn how Shopify Shipping saves small e-commerce businesses up to
 author: "Vladislav T."
 tags: ["shopify shipping for small business"]
 seoTitle: "Shopify Shipping for Small Business: 2026 Setup Guide | App Compare"
+heroImage: "/images/shopify-shipping-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner preparing and packing a product box for shipment"
 ---
 
 # Shopify Shipping for Small Business: 2026 Guide
