@@ -6,6 +6,8 @@ description: "Learn ecommerce SEO strategies for small business: keyword researc
 author: "Vladislav T."
 tags: ["ecommerce seo for small business"]
 seoTitle: "Ecommerce SEO for Small Business: 2026 Guide | App Compare"
+heroImage: "/images/ecommerce-seo-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner reviewing ecommerce analytics and SEO performance on laptop"
 ---
 
 # Ecommerce SEO for Small Business: 2026 Guide
