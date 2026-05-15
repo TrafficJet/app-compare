@@ -6,6 +6,8 @@ description: "Master product listings for small business with SEO-optimized titl
 author: "Vladislav T."
 tags: ["product listing for small business"]
 seoTitle: "Product Listings for Small Business: Complete SEO Guide | App Compare"
+heroImage: "/images/product-listing-for-small-business/hero.jpg"
+heroImageAlt: "Small business owner reviewing and editing product listings on laptop screen"
 ---
 
 # Product Listings for Small Business: A Practical Guide
