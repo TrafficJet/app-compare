@@ -6,6 +6,8 @@ description: "Recover lost sales with proven abandoned cart tactics: checkout fi
 author: "Vladislav T."
 tags: ["best abandoned cart tips"]
 seoTitle: "Best Abandoned Cart Tips to Recover Lost Sales | App Compare"
+heroImage: "/images/best-abandoned-cart-tips/hero.jpg"
+heroImageAlt: "E-commerce checkout page displayed on laptop screen showing cart items and payment options"
 ---
 
 # Best Abandoned Cart Tips to Recover Lost Sales (2026)
